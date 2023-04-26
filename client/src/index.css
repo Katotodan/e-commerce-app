@@ -1,0 +1,140 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} 
+:root{
+  --primary--color: rgb(118, 118, 176);
+  --secondary--color: #eee;
+}
+.App{
+  position: relative;
+  width: 100%;
+}
+/* Nav styling */
+nav{
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 10%;
+  background-color: var(--secondary--color);
+  font-size: 1.5rem;
+  position: fixed;
+  z-index: 3333;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.nav--list{
+  display: flex;
+}
+.nav--list li{
+  text-decoration: none;
+  list-style: none;
+}
+.nav--list li:first-child{
+  margin-right: 4rem;
+}
+.nav--btn button{
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: var(--primary--color);
+  border-radius: 5px;
+}
+.nav--btn button:first-child{
+  margin-right: 2rem;
+}
+
+/* Main container style */
+.main--container{
+  display: flex;
+  position: relative;
+  margin-top: 8rem;
+}
+/* Left menu */
+.left--menu{
+  background-color: var(--secondary--color);
+  height: 80vh;
+  position: fixed;
+  width: 17rem;
+  padding: 2rem 1rem;
+}
+.left-search{
+  display: block;
+  margin: 0 auto;
+  padding: 0.25rem;
+  width: 100%;
+}
+.left--menu h4{
+  margin: 2rem 0 0.5rem 0;
+}
+.left--menu div{
+  margin: 1rem 0;
+}
+.left--menu div input{
+  display: inline-block;
+  width: 5rem;
+  margin-left: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+}
+.left--menu button{
+  display: block;
+  margin: 0 auto;
+  width: 9rem;
+  background-color: var(--primary--color);
+  text-align: center;
+  padding: 0.5rem;
+  margin-top: 4rem;
+}
+/* Right main */
+.right--main{
+  margin-left: 19rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+  
+}
+.right--main div{
+  border: 1px solid black;
+  width: 30%;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+.right--main .main--img{
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+.right--main span.like, .right--main p{
+  margin-left: 1rem;
+}
+.right--main span.likebtn{
+  display: inline-block;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+.right--main span.unlike{
+  display: inline-block;
+  margin-left: 2rem;
+}
+

@@ -1,0 +1,1 @@
+This is an e-commerce web app, build with react.js, node.js, express.js and mongodb
