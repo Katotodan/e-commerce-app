@@ -11,12 +11,13 @@ const getAllProducts = async(req,res,next) =>{
 const getProduct = async(req,res,next) =>{
     try {
         // Any query params
-        const {name,company,price,rate} = req.query
+        const {name,company,price,rate, id} = req.query
         let queryParams = {}
         if(name) queryParams.name = name
         if(company) queryParams.company = company
         if(price) queryParams.price = price
         if(rate) queryParams.rate = rate
+        if(id) queryParams._id = id
         const product = await productModel.find(queryParams)
         res.status(200).send(product)
     } catch (error) {

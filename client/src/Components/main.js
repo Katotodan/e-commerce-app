@@ -1,5 +1,6 @@
 import "../index.css"
 import { useEffect, useState } from "react"
+import {Link} from "react-router-dom"
 
 
 const Header =() =>{
@@ -50,22 +51,30 @@ const LeftMenu =() =>{
 const Main = () =>{
     const [elmtList, setElmntList] = useState([])
     let newArray = []
+    const [currentItem ,setCurrentItem] = useState(0)
     useEffect(() =>{
         fetch("http://localhost:8080/getallproducts")
         .then(res => res.json()) 
         .then(data => {
             data.forEach(element => {
                newArray.push(
+
                <div 
                key={element._id} 
-               id={element._id}
-               onClick={divClicked}>
-                <img src={element.images[0]} className="main--img" />
-                <p>{element.name}</p>
-                <span className="likebtn like">❤</span>
-                <span >13</span>
-                <span className="likebtn unlike">😡</span>
-                <span >0</span> 
+               onClick={ () =>{
+                setCurrentItem(element._id)
+                divClicked(element._id)
+                }}>
+                    <Link to ={`/${element._id}`}>
+                        <img src={element.images[0]} className="main--img" alt="Item picture" />
+                        <p>{element.name}</p>
+                        <br/>
+                    </Link>
+                    <span className="likebtn like">❤</span>
+                    <span>13</span>
+                    <span className="likebtn unlike">😡</span>
+                    <span >0</span>
+                 
                </div>) 
             })
         })
@@ -76,8 +85,8 @@ const Main = () =>{
         .catch(error => console.log(error))
     }, [])
 
-    const divClicked = (e) =>{
-        console.log(e.target.attributes)
+    const divClicked = (id) =>{
+        console.log(id)
         // I have to work here
     }
     return(

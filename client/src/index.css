@@ -1,4 +1,4 @@
-*{
+*, *::after, *::before{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -136,5 +136,51 @@ nav{
 .right--main span.unlike{
   display: inline-block;
   margin-left: 2rem;
+}
+.like-span{
+  display: inline-block;
+  margin-right: 2.5rem;
+}
+a{
+  color: black;
+  text-decoration: none;
+  
+}
+/* Item style */
+.item-main-div{
+  margin-left: 19rem;
+  
+}
+.item-main-div div:first-child{
+  text-align: center;
+}
+.item-main-div div:nth-child(2){
+  margin-left: 25%;
+}
+.item-main-div button{
+  display: block;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary--color);
+  border: none;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+.item-main-div img{
+  width: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+/* Not find page style */
+.not-find{
+  margin-left: 19rem;
+  width: 100%;
+}
+.not-find h2{
+  text-align: center;
 }
 

@@ -1,6 +1,7 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { Header, LeftMenu, Main } from "./Components/main";
 import "./index.css"
+import {Outlet} from "react-router-dom"
 
 function App() {
   
@@ -9,11 +10,11 @@ function App() {
       <Header/>
       <div className="main--container">
         <LeftMenu/>
-        <Main/>
+        <Outlet/>
       </div>
     </div>
   );
 }
 
-// Start in main.js
+// Working on search functionnality and then buy
 export default App;
