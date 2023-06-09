@@ -12,38 +12,63 @@ const Header =() =>{
                 <li>Stock</li>
             </div>
             <div className="nav--btn">
-                <button>Log in</button>
-                <button>Sign in</button>
+                <button> <Link to="/login">Log in</Link></button>
+                <button><Link to="/signin">Sign in</Link></button>
             </div>
         </nav>
     )
 }
 
-const LeftMenu =() =>{
+const LeftMenu =({handleSubit}) =>{
+    const [inputName, setInputName] = useState("")
+    const [campany, setCampany] = useState("")
+    const [price, setPrice] = useState(0)
+    const handleChange = (e,second)=>{
+        switch (second) {
+            case "inputName":
+                setInputName(e.target.value)
+                break;
+            case "campany":
+                setCampany(e.target.value)
+                
+                break;
+            case "price":
+                setPrice(e.target.value)
+                break;
+        
+            default:
+                break;
+        }
+    }
     return(
         <div className="left--menu">
-            <input placeholder="Search by item name" className="left-search"/>
-            <h4>Category</h4>
-            <select>
-                <option>All</option>
-                <option>Rooms</option>
-                <option>Mobile</option>
-                <option>I.T</option>
-                <option>Mecanic</option>
-            </select>
-            <h4>Company</h4>
-            <select>
-                <option>All</option>
-                <option>Nokia</option>
-                <option>Samsung</option>
-                <option>Tecno</option>
-                <option>Alibaba</option>
-            </select>
-            <div>
-                <label htmlFor="price">Price:</label>
-                <input id="price" type="number"/>
-            </div>
-            <button>Search</button>
+            <form 
+            onSubmit={
+                (e) =>{
+                    handleSubit(e,inputName,campany,price)
+                } 
+            }
+            >
+                <input 
+                placeholder="Search by item name" 
+                className="left-search"
+                value={inputName} onChange={(e) =>handleChange(e,"inputName")}/>
+                <h4>Campany</h4>
+                <input
+                  placeholder="Campany"
+                  value={campany}
+                  onChange={(e) =>handleChange(e,"campany")}
+                />
+                <div>
+                    <label htmlFor="price">Price:</label>
+                    <input id="price" 
+                    type="number" value={price} 
+                    onChange={(e) =>handleChange(e,"price")}/>
+                </div>
+                <button type="submit">Search</button>
+            </form>
+            
+            
         </div>
     )
 }

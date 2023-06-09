@@ -16,7 +16,7 @@ const productScheme = new mongoose.Schema({
     rate:{
         type: Number
     },
-    company:{
+    campany:{
         type: String,
         required: true
     },

@@ -11,10 +11,10 @@ const getAllProducts = async(req,res,next) =>{
 const getProduct = async(req,res,next) =>{
     try {
         // Any query params
-        const {name,company,price,rate, id} = req.query
+        const {name, campany,price,rate, id} = req.query
         let queryParams = {}
         if(name) queryParams.name = name
-        if(company) queryParams.company = company
+        if(campany) queryParams.company = campany
         if(price) queryParams.price = price
         if(rate) queryParams.rate = rate
         if(id) queryParams._id = id
@@ -56,3 +56,4 @@ const deleteProduct = async(req, res, next) =>{
 
 
 module.exports = {addProduct, getProduct, getAllProducts, updateProduct, deleteProduct}
+

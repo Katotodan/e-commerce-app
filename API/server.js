@@ -15,7 +15,7 @@ const startApp = async() =>{
         await dbConnection()
         app.listen(PORT, console.log('Server is listening on port' +PORT+'....'))
     } catch (error) {
-        console.log('Something went wrong')
+        console.log(error)
     }
 }
 startApp()
