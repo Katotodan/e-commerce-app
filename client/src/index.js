@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { Main } from './Components/main.js';
+import Product from './Components/Product/Product.jsx';
 import Item from './Components/item.js';
 import NotFind from './Components/notFind.js';
 import FindElmnt from './Components/searchResult';
-import SignIn from './Components/signIn';
-import LogIn from './Components/logIn'
+
+import { SignIn } from './pages/SignUp.js';
+import { LogIn } from './pages/LogIn.js';
+ 
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,7 +23,7 @@ const route = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Main/>
+        element:<Product/>
       },
       {
         path:"/:id",
@@ -39,7 +41,7 @@ const route = createBrowserRouter([
     errorElement: <NotFind/>
   },
   {
-    path:"/signin",
+    path:"/signup",
     element:<SignIn/>,
     errorElement: <NotFind/>
   }

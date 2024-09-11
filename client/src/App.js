@@ -1,5 +1,6 @@
 import React,{useState} from "react";
-import { Header, LeftMenu } from "./Components/main";
+import Header from "./Components/Navbar/Header";
+import { LeftMenu } from "./Components/Navbar/LeftMenu";
 import "./index.css"
 import {Outlet,  useNavigate, useEffect} from "react-router-dom"
 
@@ -40,14 +41,14 @@ function App() {
   }
   
   return (
-    <div className="App">
+    <main className="App">
       <Header/>
       <div className="main--container">
         <LeftMenu handleSubit = {subitFunc}
         />
         <Outlet/>
-      </div>
-    </div>
+      </div> 
+    </main>
   );
 }
 

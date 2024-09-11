@@ -25,43 +25,6 @@ code {
   position: relative;
   width: 100%;
 }
-/* Nav styling */
-nav{
-  height: 6rem;
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem 10%;
-  background-color: var(--secondary--color);
-  font-size: 1.5rem;
-  position: fixed;
-  z-index: 3333;
-  width: 100%;
-  left: 0;
-  top: 0;
-}
-.nav--list{
-  display: flex;
-}
-.nav--list li{
-  text-decoration: none;
-  list-style: none;
-}
-.nav--list li:first-child{
-  margin-right: 4rem;
-}
-.nav--btn button{
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  background-color: var(--primary--color);
-  border-radius: 5px;
-}
-.nav--btn button:first-child{
-  margin-right: 2rem;
-}
-
 /* Main container style */
 .main--container{
   display: flex;
@@ -184,61 +147,5 @@ a{
   text-align: center;
 }
 
-/* Log In form and sign Up */
-.log--form{
-  background-color: #a3ccd5;
-  height: 100vh;
-}
-.log--form h1{
-  text-align: center;
-  padding-top: 2rem;
-}
-.log--form h2{
-  text-align: center;
-  margin:2rem 0;
-}
-.log--form .message{
-  color: rgb(141, 7, 7);
-  font-size: 1.2rem;
-  text-align: center;
-  height: 1.2rem;
-  margin-bottom: 0.5rem;
-  width: 100%;
 
-}
-.log--form form{
-  width: 50%;
-  border: 0.2rem solid black;
-  margin: 0 auto;
-  border-radius: 10px;
-  padding: 1rem 0;
-}
-.log--form form div{
-  margin-bottom: 1rem;
-}
-.log--form label{
-  display: block;
-  margin-left: 10%;
-  margin-bottom: 0.3rem;
-}
-.log--form input{
-  display: block;
-  margin: 0 auto;
-  width: 80%;
-  height: 1.5rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 5px;
-  border: none;
-  
-}
-.log--form input:focus{
-  outline: none;
-}
-.log--form button{
-  width: 20%;
-  height: 2rem;
-  border-radius: 5px;
-  background-color: var(--secondary--color);
-  margin-left: 10%;
-}
 

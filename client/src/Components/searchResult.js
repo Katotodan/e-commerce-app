@@ -1,6 +1,6 @@
 import {useParams, Link} from "react-router-dom"
 import { useEffect, useState } from "react"
-
+ 
 const FindElmnt = () =>{
     const {params} = useParams()
     console.log(params)
@@ -12,7 +12,7 @@ const FindElmnt = () =>{
         .then(res => res.json()) 
         .then(data => {
             data.forEach(element => {
-               newArray.push(
+               newArray.push( 
                <div 
                 key={element._id} 
                 onClick={ () =>{
