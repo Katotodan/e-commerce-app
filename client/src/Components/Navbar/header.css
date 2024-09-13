@@ -12,6 +12,7 @@ header{
     left: 0;
     top: 0;
 }
+/* Image logo */
 header img{
     width: 4rem;
     height: 4rem;
@@ -26,27 +27,49 @@ header img{
     text-decoration: none;
     list-style: none;
 }
+
 .nav--list li:first-child{
     margin-right: 4rem;
 }
 .nav--btn{
+    
+    
+}
+.nav--btn{
     display: flex;
     gap: 1rem;
-    align-items: first baseline;
     flex-direction: column;
-    margin-top: 3.5rem;
+    margin-top: 1rem;
     padding: 0 0.5rem 0.5rem 0.5rem;
     background-color: var(--secondary--color);
+    position: relative;
 }
-.nav--btn button{
+.nav--btn > button{
+    border: none;
+}
+.nav--btn div{
     padding: 0.5rem 1rem;
     font-size: 1.2rem;
     border: none;
     outline: none;
-    cursor: pointer;
-    background-color: var(--primary--color);
+    background-color: var(--secondary--color);
     border-radius: 5px;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: -50%;
+    pointer-events: none;
+    padding: 1rem;
+    width: 10rem;
+    
 }
-.nav--btn button:first-child{
-    margin-right: 2rem;
+.active div{
+    opacity: 1;
 }
+.nav--btn div button{
+    padding: 0.5rem 1rem;
+    background-color: var(--primary--color);
+    display: block;
+    margin: 0 auto;
+}
+

@@ -16,12 +16,20 @@ const Header = () => {
                 <li>Stock</li>
             </ul>
         </nav>
-        <div className="nav--btn">
+        <div className="nav--btn dropdown" data-dropdown="dropdown">
           {isUserSing ? (
             <>
-            <img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" alt="User Icon" />
-            <button> <Link to="/login">Log out</Link></button>
+            <button className='dropdown-btn'>
+              <img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" 
+              alt="User Icon" data-dropdown-button ="dropdown-button"/>
+            </button>
+            <div> 
+              <button>
+              <Link to="/login">Log out</Link>
+              </button>
+            </div> 
             </>
+            
           ): <button> <Link to="/login">Log in</Link></button>}
             
             

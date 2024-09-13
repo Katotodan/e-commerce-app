@@ -7,7 +7,7 @@ import {Outlet,  useNavigate, useEffect} from "react-router-dom"
 function App() {
   const navigate = useNavigate()
   let url = ""
-  const subitFunc = (e,inputName,campany,price) => {
+  const submitFunc = (e,inputName,campany,price) => {
     e.preventDefault()
     url = ""
     let hasAlreadyAquery = false
@@ -39,12 +39,33 @@ function App() {
     }
     navigate(`/view/item/${url}`)
   }
+  const hidedropdown = (e) =>{
+    const isDropdown = e.target.getAttribute('data-dropdown-button')
+    
+    
+    if(!isDropdown && e.target.closest("[data-dropdown]") != null) return
+
+    let currentDropdown
+    if(isDropdown){
+      currentDropdown = e.target.closest("[data-dropdown]");
+      currentDropdown.classList.toggle("active")      
+      console.log(currentDropdown);
+      
+    }
+
+    document.querySelectorAll("[data-dropdown].active").forEach(dropdown =>{
+      if(dropdown === currentDropdown) return
+      dropdown.classList.remove("active")
+    })
+    
+
+  }
   
   return (
-    <main className="App">
+    <main className="App" onClick={hidedropdown}>
       <Header/>
       <div className="main--container">
-        <LeftMenu handleSubit = {subitFunc}
+        <LeftMenu handleSubit = {submitFunc}
         />
         <Outlet/>
       </div> 
