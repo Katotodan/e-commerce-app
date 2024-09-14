@@ -1,0 +1,45 @@
+.left--menu{
+    background-color: var(--secondary--color);
+    width: 100%;
+    height: 100%;
+    padding: 2rem 1rem;
+}
+.left--menu h2{
+    margin-bottom: 2rem;
+}
+.left--menu input{
+    display: block;
+    margin: 0 auto;
+    padding: 0.25rem;
+    width: 100%;
+}
+.left--menu div label{
+    font-size: large;
+}
+.left--menu div input{
+    display: block;
+    width: 100%;
+    height: 2rem;
+    padding: 0.5rem;
+    margin: 0.5rem 0 1.5rem 0;
+    border-radius: 5px;
+    outline: none;
+}
+.left--menu div input.price{
+    display: inline-block;
+    width: 5rem;
+    
+}
+.left--menu button{
+    display: block;
+    margin: 0 auto;
+    width: 9rem;
+    background-color: var(--primary--color);
+    text-align: center;
+    padding: 0.5rem;
+    margin-top: 4rem;
+    border-radius: 5px;
+    border: none;
+    font-size: larger;
+
+}

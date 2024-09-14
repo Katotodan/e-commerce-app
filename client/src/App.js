@@ -1,14 +1,13 @@
 import React,{useState} from "react";
 import Header from "./Components/Navbar/Header";
-import { LeftMenu } from "./Components/Navbar/LeftMenu";
+import { LeftMenu } from "./Components/LeftMenu/LeftMenu";
 import "./index.css"
 import {Outlet,  useNavigate, useEffect} from "react-router-dom"
 
 function App() {
   const navigate = useNavigate()
   let url = ""
-  const submitFunc = (e,inputName,campany,price) => {
-    e.preventDefault()
+  const submitFunc = (inputName,campany,price) => {
     url = ""
     let hasAlreadyAquery = false
     
@@ -39,6 +38,7 @@ function App() {
     }
     navigate(`/view/item/${url}`)
   }
+
   const hidedropdown = (e) =>{
     const isDropdown = e.target.getAttribute('data-dropdown-button')
     
@@ -64,10 +64,10 @@ function App() {
   return (
     <main className="App" onClick={hidedropdown}>
       <Header/>
-      <div className="main--container">
-        <LeftMenu handleSubit = {submitFunc}
-        />
-        <Outlet/>
+      <div className="main--container" data-dropdown="dropdown">
+        <button className="search-btn" data-dropdown-button ="dropdown-button"> &#x1F50D; </button>
+        <div className="left-container"> <LeftMenu handleSubit = {submitFunc}/> </div>
+        <div className="right-container"> <Outlet/> </div>
       </div> 
     </main>
   );
