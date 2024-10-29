@@ -67,7 +67,10 @@ function App() {
       <div className="main--container" data-dropdown="dropdown">
         <button className="search-btn" data-dropdown-button ="dropdown-button"> &#x1F50D; </button>
         <div className="left-container"> <LeftMenu handleSubit = {submitFunc}/> </div>
-        <div className="right-container"> <Outlet/> </div>
+        <div className="right-container"> 
+          <h2 className="welcome--text">Welcome to our E-commerce</h2>
+          <Outlet/> 
+        </div>
       </div> 
     </main>
   );

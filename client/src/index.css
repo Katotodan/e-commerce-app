@@ -52,52 +52,19 @@ code {
   height: 80vh;
   overflow-y: auto;
 }
-
-
-
-
-/* Right main */
-.right--main{
-  /* margin-left: 19rem; */
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5%;
-  
-}
-.right--main div{
-  border: 1px solid black;
-  width: 30%;
+.welcome--text{
+  text-align: center;
   margin-bottom: 1.5rem;
-  cursor: pointer;
+
+  background-image: linear-gradient(to right, #ff7e5f, #ff7e5f, blue, #ff7e5f); /* Define the gradient colors */
+  -webkit-background-clip: text; /* Clip the background to the text */
+  -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
+  background-clip: text; /* Ensure it's supported in more browsers */
+  text-fill-color: transparent;
 }
-.right--main .main--img{
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-}
-.right--main span.like, .right--main p{
-  margin-left: 1rem;
-}
-.right--main span.likebtn{
-  display: inline-block;
-  margin-right: 0.5rem;
-  cursor: pointer;
-  margin-bottom: 0.5rem;
-}
-.right--main span.unlike{
-  display: inline-block;
-  margin-left: 2rem;
-}
-.like-span{
-  display: inline-block;
-  margin-right: 2.5rem;
-}
-a{
-  color: black;
-  text-decoration: none;
-  
-}
+
+
+
 /* Item style */
 .item-main-div{
   margin-left: 19rem;

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import "./product.css"
 
 const Product = () => {
     const [elmtList, setElmntList] = useState([])
@@ -46,9 +47,7 @@ const Product = () => {
     
     return(
         <div className="right--main">
-            {fetchError ? (
-                <div>Something whent wrong</div>
-            ) : elmtList }
+            {fetchError ? <div>Something whent wrong</div> : elmtList }
         </div>
     )
 }
