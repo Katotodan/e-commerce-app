@@ -17,7 +17,6 @@ export const LeftMenu = ({handleSubit}) => {
             case "price":
                 setPrice(e.target.value)
                 break;
-        
             default:
                 break;
         }
@@ -47,8 +46,6 @@ export const LeftMenu = ({handleSubit}) => {
                     onChange={handleChange}
                 />
                 </div>
-                
-                
                 <div>
                     <label htmlFor="price">Price: </label>
                     <input id="price" 

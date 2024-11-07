@@ -22,11 +22,20 @@ header img{
 }
 
 /* Nav list style start */
-header .dropdown-container{
+header div.dropdown-container{
     display: flex;
     width: 70%;
+}
+/* Menu icone  */
+.menu-icon{
+    display: none;
+}
+header div.dropdown-container > div{
+    width: 100%;
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
 nav ul{
     display: flex;
@@ -34,9 +43,37 @@ nav ul{
     position: relative;
     align-items: center;
     gap: 4rem;
-}
+} 
 nav ul li{
     list-style: none;
+}
+nav ul li:last-of-type{
+    position: relative;
+}
+nav ul li:last-of-type span{
+    background-color: var(--primary--color);
+    display: inline-block;
+    padding: 0.25rem;
+    border-radius: 50%;
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    color: white;
+    text-align: center;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
+}
+header .dropdown-container div div:last-of-type a{
+    text-decoration: none;
+    list-style: none;
+    color: black;
+    background-color: var(--primary--color);
+    padding: 0.5rem 1rem;    
+    border-radius: 5px;
+    font-size: large;
 }
 nav ul li button{
     border: none;
@@ -46,68 +83,67 @@ nav ul li button img{
     height: 2.5rem;
     cursor: pointer;
 }
-header .dropdown-container div:last-of-type{
+header .dropdown-container div div:last-of-type{
     display: flex;
     flex-direction: row-reverse;
     gap: 2rem;
     align-items: center;
 }
-header .dropdown-container div:last-of-type button{
+header .dropdown-container div div:last-of-type button{
     border: none;
-}
-header .dropdown-container div:last-of-type button.log-btn{
-    background-color: var(--primary--color);
-    padding: 0.5rem 1rem;    
-    border-radius: 5px;
-    font-size: large;
-}
-/* Menu icone */
-.menu-icon{
-    display: none;
 }
 
 @media only screen and (max-width: 700px) {
+    .dropdown-container.active, .dropdown-container{
+        width: auto;
+        height: auto;
+        justify-content: end;
+    }
     .menu-icon{
         display: block;
         font-size: 2rem;
         border: none;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
     }
-    .dropdown-container{
+    .dropdown-container > div{
         position: absolute;
         top: 6rem;
         right: 0;
         width: 0;
-        height: 20rem;
+        height: 0;
         margin: 0;
+        overflow-x: hidden;
         flex-direction: column;
         background-color: var(--secondary--color);
         justify-content: start !important;
         opacity: 0;
         transform: translateX(100%);
-        transition: all 1s ease, opacity 0.8s ease;
-        gap: 1rem;
+        transition: opacity 1s ease , transform 0.5s ease;
+        gap: 1rem;  
     }
-    .menu-icon:focus + .dropdown-container{
+    .dropdown-container.active > div{
         transform: translateX(0);
         width: 15rem;
         opacity: 1;
+        height: 20rem;
+        transition: opacity 1s ease , transform 0.5s ease;
 
     }
-    .dropdown-container nav ul, header .dropdown-container div:last-of-type{
+    div nav ul, header .dropdown-container div div:last-of-type{
         flex-direction: column;
-        gap: 1rem;
+        gap: 2rem;
     }
-    
 }
 @media only screen and (max-width: 600px) {
-    .dropdown-container{
+    .dropdown-container div{
         height: 100vh;
     }
-    .menu-icon:focus + .dropdown-container{
+    .dropdown-container.active > div{
         height: 100vh;
         width: 100%;
     }
-
 }
 
 

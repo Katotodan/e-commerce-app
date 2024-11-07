@@ -1,0 +1,56 @@
+h2{
+    margin-bottom: 1rem;
+}
+.card-container{
+    border: 1px solid black;
+}
+.card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid black;
+    width: 100%;
+    background-color: beige;
+}
+.card > div:first-of-type{
+    flex: 1;
+}
+.card > div:nth-of-type(2){
+    flex: 5;
+}
+.card > div:nth-of-type(3){
+    flex: 2;
+}
+.card > div:nth-of-type(){
+    flex: 1;
+}
+.card:hover{
+    background-color: rgb(233, 233, 151);
+}
+.card-header, .card-header:hover{
+    background-color: black;
+    color: white;
+}
+.card button{
+    border: none;
+    font-size: larger;
+    color: red;
+    cursor: pointer;
+    display: block;
+}
+.total{
+    text-align: center;
+    padding: 0.5rem 0;
+}
+.buy-btn{
+    padding: 0.5rem 1rem;
+    border: none;
+    font-size: larger;
+    margin-top: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.no-item{
+    text-align: center;
+}
