@@ -1,48 +1,62 @@
-import React,{useState, createContext} from "react";
+import React,{useState, createContext, useEffect} from "react";
 import Header from "./Components/Navbar/Header";
 import { LeftMenu } from "./Components/LeftMenu/LeftMenu";
 import "./index.css"
-import {Outlet,  useNavigate, useEffect} from "react-router-dom"
+import axios from 'axios'
+import {Navigate, Outlet,  useNavigate, useLocation } from "react-router-dom"
 
+// Cards context
 export const CardContext = createContext(null);
+export const ProductContext = createContext(null);
+export const SearchContext = createContext(null);
+
+
 export function App() {
-  // Cards context
   
+  const [allProduct, setAllProduct] = useState([])
+  const [products, setProducts] = useState([]);
   const [cards, setCards] = useState([]);
+  const [isSearch, setIsSearch] = useState(false)
   const navigate = useNavigate()
-  // I have to work on this search functionality later
-  let url = ""
-  const submitFunc = (inputName,campany,price) => {
-    url = ""
-    let hasAlreadyAquery = false
+  const location = useLocation();
+
+  useEffect(() =>{ 
+    const fecthData = () =>{
+        axios.get('https://dummyjson.com/products')
+        .then(res => {
+            const data = res.data.products
+            setProducts(data)  
+            setAllProduct(data)
+        })
+        .catch(error => {
+          console.error(error)
+          setProducts(null)
+        })
+    }
+    fecthData()
     
-    if (inputName) {
-      if(hasAlreadyAquery){
-        url += "&" + "name=" + inputName
-      }else{
-        url += "name=" + inputName
-        hasAlreadyAquery = !hasAlreadyAquery
-      }
-    }
-    if (campany && campany !=="") {
-      if(hasAlreadyAquery){
-        url += "&" + "campany=" + campany
-      }else{
-        url += "campany=" + campany
-        hasAlreadyAquery = !hasAlreadyAquery
-      }
-    }
-    if (price && price !== 0) {
-      if(hasAlreadyAquery){
-        url += "&" + "price=" +price
-      }else{
-        url += "price=" +price
-        hasAlreadyAquery = !hasAlreadyAquery
-      }
-      
-    }
-    navigate(`/view/item/${url}`)
+}, [])
+
+useEffect(()=>{
+  if(location.pathname === "/" && isSearch === false){
+    setProducts(allProduct) 
+    console.log(location)
+  }else{
+    setIsSearch(false)
   }
+  
+},[location])
+
+
+  // I have to work on this search functionality later
+  const submitFunc = (inputName,campany,price) => {
+    // Redirect to home
+    setIsSearch(true)
+    // Change the product arr
+    const regex = new RegExp(inputName, 'i');
+    setProducts((prev) => allProduct.filter(el => regex.test(el["title"])))    
+      
+  } 
 
   const hidedropdown = (e) =>{
     const isDropdown = e.target.getAttribute('data-dropdown-button')
@@ -61,22 +75,27 @@ export function App() {
   }
   
   return (
-    <CardContext.Provider value={{cards,setCards}}>
-    <main className="App" onClick={hidedropdown}>
-      <Header/>
-      <div className="main--container" >
-        <div  data-dropdown="dropdown" className="left-container">
-          <button className="search-btn" data-dropdown-button ="dropdown-button"> &#x1F50D; </button>
-          <div> <LeftMenu handleSubit = {submitFunc}/> </div>
-        </div>
-        
-        <div className="right-container"> 
-          <h2 className="welcome--text">Welcome to our E-commerce</h2>
-          <Outlet/> 
-        </div>
-      </div> 
-    </main>
-    </CardContext.Provider>
+    <ProductContext.Provider value={{ products, setProducts}}>
+      <CardContext.Provider value={{cards,setCards}}>
+        <SearchContext.Provider value={{isSearch, setIsSearch}}>
+          <main className="App" onClick={hidedropdown}>
+            <Header/>
+            <div className="main--container" >
+              <div  data-dropdown="dropdown" className="left-container">
+                <button className="search-btn" data-dropdown-button ="dropdown-button"> &#x1F50D; </button>
+                <div> <LeftMenu handleSubit = {submitFunc}/> </div>
+              </div>
+              
+              <div className="right-container" onClick={() => setIsSearch(false)}> 
+                
+                <Outlet/> 
+              </div>
+            </div> 
+          </main>
+        </SearchContext.Provider>
+      </CardContext.Provider>
+    </ProductContext.Provider>
   );
 }
+
 

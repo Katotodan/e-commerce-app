@@ -93,6 +93,7 @@ header .dropdown-container div div:last-of-type button{
     border: none;
 }
 
+
 @media only screen and (max-width: 700px) {
     .dropdown-container.active, .dropdown-container{
         width: auto;

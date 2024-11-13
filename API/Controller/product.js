@@ -8,6 +8,14 @@ const getAllProducts = async(req,res,next) =>{
         next(error)
     }
 }
+const getProductById = async(req,res, next) =>{
+    try {   
+        const id = req.params.id
+        console.log(id)
+    } catch (error) {
+        
+    }
+}
 const getProduct = async(req,res,next) =>{
     try {
         // Any query params
@@ -55,5 +63,5 @@ const deleteProduct = async(req, res, next) =>{
 }
 
 
-module.exports = {addProduct, getProduct, getAllProducts, updateProduct, deleteProduct}
+module.exports = {addProduct, getProduct, getAllProducts, updateProduct, deleteProduct, getProductById}
 

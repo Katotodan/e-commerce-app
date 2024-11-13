@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import {App} from './App';
 import Product from './Components/Product/Product.jsx';
-import Item from './Components/item.js';
+import {Item} from './Components/Item/item.js';
 import NotFind from './Components/notFind.js';
 import FindElmnt from './Components/searchResult';
 import { Card } from './Components/Card/Card.jsx';
@@ -55,9 +55,9 @@ const route = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
-  <React.StrictMode>
+  <div>
     <RouterProvider router={route}/>
-  </React.StrictMode>
+  </div>
 );
 
 

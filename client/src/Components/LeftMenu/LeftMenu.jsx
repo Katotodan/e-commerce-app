@@ -20,13 +20,17 @@ export const LeftMenu = ({handleSubit}) => {
             default:
                 break;
         }
+    } 
+    const sub = (e) =>{
+        e.preventDefault()
+        handleSubit(inputName,campany,price)
+        setInputName("")
+        setCampany("")
+        setPrice(0)
     }
   return (
     <div className="left--menu">
-            <form onSubmit={ e => { 
-            e.preventDefault()
-            handleSubit(inputName,campany,price)
-            }}>
+            <form onSubmit={sub}>
                 <h2>Do you searching here</h2>
                 <div>
                     <label htmlFor="">Search by name</label>
@@ -59,5 +63,3 @@ export const LeftMenu = ({handleSubit}) => {
         </div>
   )
 }
-
-// Work on dropdown button,

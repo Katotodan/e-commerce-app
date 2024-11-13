@@ -1,9 +1,31 @@
-import React, {useContext, useEffect, useState} from 'react'
-import { CardContext } from '../../App'
+import React, {useContext, useEffect, useState, useRef} from 'react'
+import { CardContext, SearchContext } from '../../App'
 import "./card.css"
+import { Navigate } from 'react-router-dom'
+
 
 export const Card = () => {
   const {cards, setCards} = useContext(CardContext)
+  const {isSearch, setIsSearch} = useContext(SearchContext)
+  const [navigateToHome, setNavigateToHome] = useState(false)
+  const isFirstRender = useRef(true);
+
+  useEffect(()=>{
+    if (isFirstRender.current) {
+      // Skip this effect on the first render
+      isFirstRender.current = false;
+      return;
+    }else{
+      if(isSearch){
+        // Navigate to home page
+        setNavigateToHome(true)
+        
+      }
+    }
+    
+
+  }, [isSearch])
+
   let sum = 0;
   const deleteItem = (element) =>{
     const newCard = cards.filter(el => el != element)
@@ -23,6 +45,7 @@ export const Card = () => {
   
   return (
     <div>
+      {navigateToHome && <Navigate to="/"/>}
         <h2>Card contents</h2>
         {itemList.length > 0 ? (
           <div className='card-container'>

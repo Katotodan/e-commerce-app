@@ -1,20 +1,30 @@
 import React, {useState, useEffect, useContext} from 'react'
-import axios from 'axios'
+
 import { Link } from 'react-router-dom'
 import "./product.css"
 import { CardContext } from '../../App'
+import { ProductContext } from '../../App'
 
 const Product = () => {
     const [elmtList, setElmntList] = useState([])
     const [fetchError, setFetchError] = useState(false)
     const {setCards} = useContext(CardContext);
+    const {products} = useContext(ProductContext);
+    const [startProduct, setStartProduct] = useState(0)
+    const [endProduct, setEndProduct] = useState(10)
+
+    useEffect(()=>{
+        setElmntList(products.slice(startProduct, endProduct))
+    }, [products])
+
+    useEffect(()=>{
+        setElmntList(products.slice(startProduct, endProduct))
+    }, [endProduct])
     const addToCard = (e,item)=>{
-        
-        
         //Add this id inside the card context
         setCards(card => [{
             id: item.id,
-            name: item.brand,
+            name: item.title,
             price: item.price,
         }, ...card])
         e.target.innerHTML = '✔'
@@ -27,54 +37,49 @@ const Product = () => {
         }, 1000);
         
     }
+    const viewMore = ()=>{
+        const productLength = products.length;
+        if(endProduct + 5 <= productLength){
+            setEndProduct(prev => prev + 5)
+        }else{
+            setEndProduct(productLength)
+        }
+        
 
-    useEffect(() =>{ 
-        axios.get('https://dummyjson.com/products')
-        .then(res => {
-            const data = res.data.products
-            setElmntList(data)
-            
-        })
-        .catch(error => {
-            setFetchError(true)
-            console.log(error)
+    }
 
-        })
-    }, [])
+    
 
     
     return(
         <div className="right--main">
-            {fetchError ? <div>Something whent wrong</div> : (
-                elmtList.map((element) => (
-                    <div key={element.id}>
-                        <img src={element.images[0]} className="main--img" alt="Item picture" />
-                        <h3>{element.brand}</h3>
-                        <br />
-                        {/* Desable like functionality */}
-                        <div>
-                            <div>${element.price}</div>
+            <h2 className="welcome--text">Welcome to our E-commerce</h2>
+            <div className='flex-container'>
+                {fetchError ? <div>Something whent wrong</div> : (
+                    elmtList.map((element) => (
+                        <div key={element.id}>
+                            <img src={element.images[0]} className="main--img" alt="Item picture" />
+                            <h3>{element.title}</h3>
+                            <br />
+                            {/* Desable like functionality */}
                             <div>
-                                <div>
-                                    <span className="likebtn like">❤</span>
-                                    <span>13</span>
-                                </div>
-                                
-                                <div>
-                                    <span className="likebtn unlike">😡</span>
-                                    <span>0</span>
-                                </div>
+                                <div><strong>Price</strong>: ${element.price}</div>
+                                <div><strong>Rate</strong>: {element.rating}</div>
                             </div>
-                        </div>
-                       
-                        <div>
-                            <button type="button" onClick={(e) => addToCard(e,element)}>Add to card</button>
-                            <button type="button" value={element.id}>View details</button>
-                        </div>
-                    </div> 
-                ))
+                        
+                            <div>
+                                <button type="button" onClick={(e) => addToCard(e,element)}>Add to card</button>
+                                <button type="button">
+                                    <Link to={`/${element.id}`} className='link'>View details</Link>
+                                </button>
+                            </div>
+                        </div> 
+                    ))
+                )}
+
+            </div>
             
-            ) }
+            {endProduct< products.length && <button className='readMore-btn' onClick={viewMore}>View more</button>}
         </div>
     )
 }

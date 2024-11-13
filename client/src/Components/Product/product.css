@@ -1,19 +1,33 @@
 /* Right main */
 .right--main{
   width: 100%;
+  
+}
+.flex-container{
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 5%;
   justify-content: space-evenly;
 }
+.welcome--text{
+  text-align: center;
+  margin-bottom: 1.5rem;
 
-.right--main > div{
+  background-image: linear-gradient(to right, #ff7e5f, #ff7e5f, blue, #ff7e5f); /* Define the gradient colors */
+  -webkit-background-clip: text; /* Clip the background to the text */
+  -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
+  background-clip: text; /* Ensure it's supported in more browsers */
+  text-fill-color: transparent;
+}
+
+.right--main .flex-container > div{
   border: 1px solid black;
   width: 30%;
   min-width: 15rem;
   margin-bottom: 1.5rem;
 }
-.right--main .main--img{
+.right--main .flex-container .main--img{
   width: 100%;
   height: 320px;
   object-fit: cover;
@@ -21,12 +35,12 @@
 .right--main h3{
   text-align: center;
 }
-.right--main > div div{
+.right--main .flex-container > div div{
   display: flex;
   justify-content: space-between;
   padding: 0 0.5rem 0.5rem 0.5rem;
 }
-.right--main > div div button{
+.right--main .flex-container > div div button{
   background-color: var(--primary--color);
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -35,8 +49,19 @@
   
 }
 
-.right--main > div div button:first-of-type{
+.right--main .flex-container > div div button:first-of-type{
   width: 45%;
   height: 2.5rem;  
+}
+.readMore-btn{
+  display: block;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary--color);
+  border: none;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  width: 10rem;
 }
 
