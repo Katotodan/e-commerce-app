@@ -64,4 +64,14 @@
   margin-bottom: 2rem;
   width: 10rem;
 }
+.back-btn{
+  float: right;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  font-size: large;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
 

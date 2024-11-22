@@ -6,7 +6,17 @@ const cors = require('cors')
 const PORT = 8080
 
 // Middleware
-app.use(cors())
+app.use(cors({
+    origin:"http://localhost:3000",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: [
+        'Content-Type', 
+        'Authorization', 
+        'Access-Control-Allow-Credentials', 
+        'Access-Control-Allow-Origin',
+    ],
+    credentials: true
+}))
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use("", routes)

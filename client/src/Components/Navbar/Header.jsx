@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import "./header.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { CardContext } from '../../App';
+import { CardContext } from '../../context';
 
 const Header = () => {
   const [isUserSignIn, setIsUserSignIn] = useState(true)

@@ -28,7 +28,7 @@ export const LeftMenu = ({handleSubit}) => {
         setCampany("")
         setPrice(0)
     }
-  return (
+  return ( 
     <div className="left--menu">
             <form onSubmit={sub}>
                 <h2>Do you searching here</h2>
@@ -38,7 +38,7 @@ export const LeftMenu = ({handleSubit}) => {
                     placeholder="Search by item name" 
                     className="left-search"
                     name='inputName'
-                    value={inputName} onChange={handleChange}/>
+                    value={inputName} onChange={handleChange} required/>
 
                 </div>
                 <div>

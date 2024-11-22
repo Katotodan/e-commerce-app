@@ -1,4 +1,4 @@
-import { Form } from "react-router-dom"
+import { Form } from "../Components/LogForm/Form"
 
 export const SignIn = () =>{
     const handleSubmition = () =>{

@@ -2,16 +2,15 @@ import React, {useState, useEffect, useContext} from 'react'
 
 import { Link } from 'react-router-dom'
 import "./product.css"
-import { CardContext } from '../../App'
-import { ProductContext } from '../../App'
+import { CardContext, ProductContext, SearchContext} from '../../context'
 
-const Product = () => {
+export const Product = () => {
     const [elmtList, setElmntList] = useState([])
-    const [fetchError, setFetchError] = useState(false)
     const {setCards} = useContext(CardContext);
     const {products} = useContext(ProductContext);
     const [startProduct, setStartProduct] = useState(0)
     const [endProduct, setEndProduct] = useState(10)
+    const {isSearch, setIsSearch} = useContext(SearchContext)
 
     useEffect(()=>{
         setElmntList(products.slice(startProduct, endProduct))
@@ -47,6 +46,9 @@ const Product = () => {
         
 
     }
+    const viewAllProduct = ()=>{
+        setIsSearch(false)
+    }
 
     
 
@@ -54,8 +56,9 @@ const Product = () => {
     return(
         <div className="right--main">
             <h2 className="welcome--text">Welcome to our E-commerce</h2>
+            {isSearch && <button onClick={viewAllProduct} className='back-btn'>Back</button>}
             <div className='flex-container'>
-                {fetchError ? <div>Something whent wrong</div> : (
+                {
                     elmtList.map((element) => (
                         <div key={element.id}>
                             <img src={element.images[0]} className="main--img" alt="Item picture" />
@@ -75,7 +78,7 @@ const Product = () => {
                             </div>
                         </div> 
                     ))
-                )}
+                }
 
             </div>
             
@@ -83,4 +86,3 @@ const Product = () => {
         </div>
     )
 }
-export default Product

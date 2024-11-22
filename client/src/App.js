@@ -1,15 +1,12 @@
-import React,{useState, createContext, useEffect} from "react";
+import React,{useState, useEffect} from "react";
 import Header from "./Components/Navbar/Header";
 import { LeftMenu } from "./Components/LeftMenu/LeftMenu";
 import "./index.css"
 import axios from 'axios'
-import {Navigate, Outlet,  useNavigate, useLocation } from "react-router-dom"
+import {Navigate, Outlet, useLocation } from "react-router-dom"
 
 // Cards context
-export const CardContext = createContext(null);
-export const ProductContext = createContext(null);
-export const SearchContext = createContext(null);
-
+import { CardContext,ProductContext, SearchContext, UserContext} from "./context";
 
 export function App() {
   
@@ -17,8 +14,8 @@ export function App() {
   const [products, setProducts] = useState([]);
   const [cards, setCards] = useState([]);
   const [isSearch, setIsSearch] = useState(false)
-  const navigate = useNavigate()
   const location = useLocation();
+  const [userInfo, setUserInfo] = useState(null)
 
   useEffect(() =>{ 
     const fecthData = () =>{
@@ -40,15 +37,19 @@ export function App() {
 useEffect(()=>{
   if(location.pathname === "/" && isSearch === false){
     setProducts(allProduct) 
-    console.log(location)
   }else{
     setIsSearch(false)
   }
   
 },[location])
 
+useEffect(()=>{
+  if(!isSearch){
+    setProducts(allProduct) 
+  }
+  
+},[isSearch])
 
-  // I have to work on this search functionality later
   const submitFunc = (inputName,campany,price) => {
     // Redirect to home
     setIsSearch(true)
@@ -75,6 +76,7 @@ useEffect(()=>{
   }
   
   return (
+    <UserContext.Provider value={{ userInfo, setUserInfo}}>
     <ProductContext.Provider value={{ products, setProducts}}>
       <CardContext.Provider value={{cards,setCards}}>
         <SearchContext.Provider value={{isSearch, setIsSearch}}>
@@ -95,6 +97,7 @@ useEffect(()=>{
         </SearchContext.Provider>
       </CardContext.Provider>
     </ProductContext.Provider>
+    </UserContext.Provider>
   );
 }
 

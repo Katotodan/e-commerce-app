@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import {App} from './App';
-import Product from './Components/Product/Product.jsx';
+import {Product} from './Components/Product/Product.jsx';
 import {Item} from './Components/Item/item.js';
 import NotFind from './Components/notFind.js';
 import FindElmnt from './Components/searchResult';
@@ -10,6 +10,8 @@ import { Card } from './Components/Card/Card.jsx';
 
 import { SignIn } from './pages/SignUp.js';
 import { LogIn } from './pages/LogIn.js';
+
+import { UserContext } from './context.js';
  
 import {
   createBrowserRouter,
@@ -52,6 +54,9 @@ const route = createBrowserRouter([
   }
 ])
 
+console.log(UserContext);
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
@@ -59,6 +64,7 @@ root.render(
     <RouterProvider router={route}/>
   </div>
 );
+// Putting the router into App.js 
 
 
 

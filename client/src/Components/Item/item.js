@@ -1,7 +1,8 @@
-import {useEffect, useState, useContext} from "react"
-import {useParams} from "react-router-dom"
-import { ProductContext } from "../../App"
-import { CardContext } from "../../App"
+import {useEffect, useState, useContext, useRef} from "react"
+import {useParams, Navigate} from "react-router-dom"
+import {  } from "../../App"
+import { ProductContext, CardContext, SearchContext} from "../../context"
+
 
 import "./item.css"
 
@@ -10,10 +11,33 @@ export function Item(){
     const {products} = useContext(ProductContext)
     const [product,setProduct] = useState([])
     const {setCards} = useContext(CardContext);
+    // Navigation code when the search is true
+    
+    const {isSearch, setIsSearch} = useContext(SearchContext)
+  const [navigateToHome, setNavigateToHome] = useState(false)
+  const isFirstRender = useRef(true);
 
     useEffect(()=>{
         setProduct(products.filter(el => el.id === id))        
     }, [])
+
+    
+
+  useEffect(()=>{
+    if (isFirstRender.current) {
+      // Skip this effect on the first render
+      isFirstRender.current = false;
+      return;
+    }else{
+      if(isSearch){
+        // Navigate to home page
+        setNavigateToHome(true)
+        
+      }
+    }
+    
+
+  }, [isSearch])
     
     useEffect(()=>{
         // I don't have to fetch because I am using the product context now
@@ -46,6 +70,7 @@ export function Item(){
 
     return(
         <div className="item-container">
+            {navigateToHome && <Navigate to="/"/>}
             <div>
                 <h2>{product[0]?.title}</h2>
                 <img src={product[0]?.images[0]}/>

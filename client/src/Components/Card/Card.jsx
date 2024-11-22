@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState, useRef} from 'react'
-import { CardContext, SearchContext } from '../../App'
+import { CardContext, SearchContext } from '../../context'
 import "./card.css"
 import { Navigate } from 'react-router-dom'
 

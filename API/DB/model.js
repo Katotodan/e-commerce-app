@@ -25,6 +25,17 @@ const productScheme = new mongoose.Schema({
         default: undefined
     }
 })
+const userScheme = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    password:{
+        type: String,
+        default: true
+    }
+})
 
 const productModel = mongoose.model('Product', productScheme)
-module.exports = productModel
+const userModel = mongoose.model('User', userScheme)
+module.exports = {productModel, userModel}
