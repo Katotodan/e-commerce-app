@@ -1,51 +1,51 @@
-header{
-    height: 6rem;
+nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
     background-color: var(--secondary--color);
-    font-size: 1.5rem;
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    left: 0;
-    top: 0;
-}
-/* Image logo */
-header img{
-    width: 4rem;
     height: 4rem;
-    object-fit: cover;
-    border-radius: 50%;
-    margin: auto;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 5;
+}
+nav .menu-icon{
+    font-size: 2.5rem;
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
 }
 
-/* Nav list style start */
-header div.dropdown-container{
-    display: flex;
-    width: 70%;
-}
-/* Menu icone  */
-.menu-icon{
-    display: none;
-}
-header div.dropdown-container > div{
+nav .dropdown-container > div{
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    background-color: var(--secondary--color);
+    height: calc(100vh - 4rem);
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    
+    gap: 2.5rem;
+    transform: translateX(100%);
 }
-nav ul{
+nav .active > div{
+    transform: translateX(0%);
+    transition: transform 1s;
+}
+nav .dropdown-container > div ul, .logout-container{
+    margin-top: 3rem;
     display: flex;
-    justify-content: center;
-    position: relative;
-    align-items: center;
-    gap: 4rem;
-} 
-nav ul li{
+    flex-direction: column;
+    gap: 2rem;
     list-style: none;
+}
+nav .logout-container{
+    margin-top: 0rem;
+}
+nav .logout-container button{
+    border: none;
+    background-color: transparent;
 }
 nav ul li:last-of-type{
     position: relative;
@@ -66,14 +66,19 @@ nav ul li:last-of-type span{
     align-items: center;
     font-size: medium;
 }
-header .dropdown-container div div:last-of-type a{
+nav .logIn--btn{
     text-decoration: none;
-    list-style: none;
     color: black;
     background-color: var(--primary--color);
-    padding: 0.5rem 1rem;    
+    padding: 0.5rem 1rem;
     border-radius: 5px;
-    font-size: large;
+}
+nav img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
 }
 nav ul li button{
     border: none;
@@ -81,70 +86,39 @@ nav ul li button{
 nav ul li button img{
     width: 2.5rem;
     height: 2.5rem;
-    cursor: pointer;
 }
-header .dropdown-container div div:last-of-type{
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 2rem;
-    align-items: center;
-}
-header .dropdown-container div div:last-of-type button{
-    border: none;
-}
-
-
-@media only screen and (max-width: 700px) {
-    .dropdown-container.active, .dropdown-container{
-        width: auto;
-        height: auto;
-        justify-content: end;
-    }
-    .menu-icon{
-        display: block;
-        font-size: 2rem;
-        border: none;
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-    }
-    .dropdown-container > div{
-        position: absolute;
-        top: 6rem;
-        right: 0;
-        width: 0;
-        height: 0;
-        margin: 0;
-        overflow-x: hidden;
-        flex-direction: column;
-        background-color: var(--secondary--color);
-        justify-content: start !important;
-        opacity: 0;
-        transform: translateX(100%);
-        transition: opacity 1s ease , transform 0.5s ease;
-        gap: 1rem;  
-    }
-    .dropdown-container.active > div{
-        transform: translateX(0);
-        width: 15rem;
-        opacity: 1;
-        height: 20rem;
-        transition: opacity 1s ease , transform 0.5s ease;
-
-    }
-    div nav ul, header .dropdown-container div div:last-of-type{
-        flex-direction: column;
-        gap: 2rem;
-    }
-}
-@media only screen and (max-width: 600px) {
-    .dropdown-container div{
-        height: 100vh;
-    }
-    .dropdown-container.active > div{
-        height: 100vh;
+@media (min-width: 768px) {
+    nav{
+        height: 4rem;
+        padding: 0 3rem;
         width: 100%;
+        justify-content: left;
+    }
+    nav > div:first-of-type{
+        width: 30%;
+        
+    }
+    nav .dropdown-container{
+        width: 70%;
+    }
+    nav .menu-icon{
+        display: none;
+    }
+    nav .dropdown-container > div{
+        position: static;
+        height: 4rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2.5rem;
+        transform: translateX(0%);
+        transition: all 0s;
+    }
+    nav .dropdown-container > div ul, .logout-container{
+        margin-top: 0;
+        flex-direction: row;
+        align-items: center;
+        gap: 4rem;
     }
 }
-
-

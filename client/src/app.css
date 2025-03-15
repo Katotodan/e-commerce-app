@@ -1,0 +1,68 @@
+.App{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.main--container .active{
+    display: block;
+} 
+.main--container .inactive{
+    display: none;
+}
+.left-container{
+    width: 100%;
+    height: 100%;
+}
+.right-container{
+    width: 100%;
+    padding: 0 1rem;
+    height: 100%;
+}
+ /*Larger screen  */
+@media (min-width: 768px) {
+    .search-btn{
+        display: none;
+    }
+    .main--container .active{
+        display: block;
+    } 
+    .main--container .inactive{
+        display: block;
+    }
+      /* Main container style */
+    .main--container{
+        display: flex;
+        position: relative;
+        margin-top: 0rem;
+        z-index: 4;
+        height: calc(100vh - 4rem);
+    }
+    /* LEFT AND RIGHT CONTAINER STYLE */
+    .search-btn{
+        position: absolute;
+        top: 2rem;
+        left: 0.25rem;
+        font-size: 1.5rem;
+        display: none;
+        border: none;
+        background-color: transparent;
+        z-index: 2;
+    }
+    .left-container{
+        width: 30%;
+        padding-top: 2rem ;
+    }
+    .right-container{
+        width: 70%;
+        padding: 0 1rem;
+        overflow-y: auto;
+        padding-top: 2rem ;
+    }
+}
+/* Contuine working on the main container */
+  
+   
+
+    
+    

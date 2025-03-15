@@ -49,9 +49,6 @@ export const Product = () => {
     const viewAllProduct = ()=>{
         setIsSearch(false)
     }
-
-    
-
     
     return(
         <div className="right--main">

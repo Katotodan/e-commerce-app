@@ -1,7 +1,7 @@
-import React,{useState, useEffect} from "react";
+import React,{useState, useEffect, useRef} from "react";
 import Header from "./Components/Navbar/Header";
 import { LeftMenu } from "./Components/LeftMenu/LeftMenu";
-import "./index.css"
+import "./app.css"
 import axios from 'axios'
 import {Navigate, Outlet, useLocation } from "react-router-dom"
 
@@ -16,8 +16,12 @@ export function App() {
   const [isSearch, setIsSearch] = useState(false)
   const location = useLocation();
   const [userInfo, setUserInfo] = useState(null)
-
+  const leftMenu = useRef(null)
+  const rightContent = useRef(null)
+  
   useEffect(() =>{ 
+    if(rightContent) rightContent.current.classList.add("active")
+      if(leftMenu) leftMenu.current.classList.add("inactive")
     const fecthData = () =>{
         axios.get('https://dummyjson.com/products')
         .then(res => {
@@ -60,12 +64,11 @@ useEffect(()=>{
   } 
 
   const hidedropdown = (e) =>{
-    const isDropdown = e.target.getAttribute('data-dropdown-button')
+    const isDropdownBtn = e.target.getAttribute('data-dropdown-button')
     
-    if(!isDropdown && e.target.closest("[data-dropdown]") != null) return
-
+    if(!isDropdownBtn && e.target.closest("[data-dropdown]") != null) return
     let currentDropdown
-    if(isDropdown){
+    if(isDropdownBtn){
       currentDropdown = e.target.closest("[data-dropdown]");
       currentDropdown.classList.toggle("active")       
     }
@@ -73,6 +76,12 @@ useEffect(()=>{
       if(dropdown === currentDropdown) return
       dropdown.classList.remove("active")
     })
+  }
+  const toggleLeftMenu = ()=>{
+    rightContent.current.classList.toggle("inactive")
+    leftMenu.current.classList.toggle("inactive")
+    rightContent.current.classList.toggle("active")
+    leftMenu.current.classList.toggle("active")
   }
   
   return (
@@ -82,13 +91,13 @@ useEffect(()=>{
         <SearchContext.Provider value={{isSearch, setIsSearch}}>
           <main className="App" onClick={hidedropdown}>
             <Header/>
-            <div className="main--container" >
-              <div  data-dropdown="dropdown" className="left-container">
-                <button className="search-btn" data-dropdown-button ="dropdown-button"> &#x1F50D; </button>
-                <div> <LeftMenu handleSubit = {submitFunc}/> </div>
+            <div className="main--container">
+              <button className="search-btn" onClick={toggleLeftMenu}> &#x1F50D; </button>
+              <div className="left-container" ref={leftMenu}>
+                <LeftMenu handleSubit = {submitFunc}/>
               </div>
               
-              <div className="right-container" onClick={() => setIsSearch(false)}> 
+              <div className="right-container" ref={rightContent} onClick={() => setIsSearch(false)}> 
                 
                 <Outlet/> 
               </div>
