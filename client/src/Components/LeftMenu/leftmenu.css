@@ -12,6 +12,7 @@
     margin: 0 auto;
     padding: 0.25rem;
     width: 100%;
+    border: 1px solid black;
 }
 .left--menu div label{
     font-size: large;

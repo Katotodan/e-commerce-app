@@ -48,6 +48,7 @@
         border: none;
         background-color: transparent;
         z-index: 2;
+        cursor: pointer;
     }
     .left-container{
         width: 30%;

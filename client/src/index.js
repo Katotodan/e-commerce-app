@@ -54,8 +54,6 @@ const route = createBrowserRouter([
   }
 ])
 
-console.log(UserContext);
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

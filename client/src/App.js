@@ -18,10 +18,9 @@ export function App() {
   const [userInfo, setUserInfo] = useState(null)
   const leftMenu = useRef(null)
   const rightContent = useRef(null)
+  const [viewSearchBtn, setViewSearchBtn] = useState(true)
   
   useEffect(() =>{ 
-    if(rightContent) rightContent.current.classList.add("active")
-      if(leftMenu) leftMenu.current.classList.add("inactive")
     const fecthData = () =>{
         axios.get('https://dummyjson.com/products')
         .then(res => {
@@ -82,6 +81,7 @@ useEffect(()=>{
     leftMenu.current.classList.toggle("inactive")
     rightContent.current.classList.toggle("active")
     leftMenu.current.classList.toggle("active")
+    setViewSearchBtn(!viewSearchBtn)
   }
   
   return (
@@ -92,12 +92,13 @@ useEffect(()=>{
           <main className="App" onClick={hidedropdown}>
             <Header/>
             <div className="main--container">
-              <button className="search-btn" onClick={toggleLeftMenu}> &#x1F50D; </button>
-              <div className="left-container" ref={leftMenu}>
+              {viewSearchBtn && <button className="search-btn" onClick={toggleLeftMenu}> &#x1F50D; </button>}
+              {!viewSearchBtn && <button className="search-btn" onClick={toggleLeftMenu}> &#10060; </button>}
+              <div className="left-container inactive" ref={leftMenu}>
                 <LeftMenu handleSubit = {submitFunc}/>
               </div>
               
-              <div className="right-container" ref={rightContent} onClick={() => setIsSearch(false)}> 
+              <div className="right-container active" ref={rightContent} onClick={() => setIsSearch(false)}> 
                 
                 <Outlet/> 
               </div>

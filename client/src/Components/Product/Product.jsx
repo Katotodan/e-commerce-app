@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, useRef} from 'react'
 
 import { Link } from 'react-router-dom'
 import "./product.css"
@@ -58,9 +58,18 @@ export const Product = () => {
                 {
                     elmtList.map((element) => (
                         <div key={element.id}>
-                            <img src={element.images[0]} className="main--img" alt="Item picture" />
+                            <div className='img-container'>
+                                <img src={element.images[0]} className="main--img" alt="Item picture" 
+                                loading='lazy' 
+                                onLoad={(e) => {
+                                    e.target.parentElement.classList.add("loaded")
+                                    console.log(e.target.parentElement);
+                                    
+                                    }}/>
+                            </div>
+                            
                             <h3>{element.title}</h3>
-                            <br />
+                            <br /> 
                             {/* Desable like functionality */}
                             <div>
                                 <div><strong>Price</strong>: ${element.price}</div>
@@ -79,7 +88,7 @@ export const Product = () => {
 
             </div>
             
-            {endProduct< products.length && <button className='readMore-btn' onClick={viewMore}>View more</button>}
+            {endProduct < products.length && <button className='readMore-btn' onClick={viewMore}>View more</button>}
         </div>
     )
 }
