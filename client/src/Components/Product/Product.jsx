@@ -3,9 +3,10 @@ import React, {useState, useEffect, useContext, useRef} from 'react'
 import { Link } from 'react-router-dom'
 import "./product.css"
 import { CardContext, ProductContext, SearchContext} from '../../context'
-import { useSearchParams } from "react-router";
+import { useSearchParams, useNavigate } from "react-router";
 
 export const Product = () => {
+    let navigate = useNavigate();
     const [elmtList, setElmntList] = useState([])
     const {setCards} = useContext(CardContext);
     const {products} = useContext(ProductContext);
@@ -15,25 +16,53 @@ export const Product = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(()=>{
-        const productName = searchParams.get("productname")
-        const productCategory = searchParams.get("category")
-        const productPrice = searchParams.get("price")
-        if(productName || productCategory || productPrice){
-            setIsSearch(true)
-        }else{
-            setIsSearch(false)
-        }
-        
-        
-    },[searchParams])
-
-    useEffect(()=>{
         setElmntList(products.slice(startProduct, endProduct))
     }, [products])
 
     useEffect(()=>{
         setElmntList(products.slice(startProduct, endProduct))
     }, [endProduct])
+
+    useEffect(()=>{
+        const productName = searchParams.get("productname")
+        const productCategory = searchParams.get("category")
+        const productPrice = searchParams.get("price")
+        if(productName || productCategory || productPrice){
+            setIsSearch(true)
+            let foundItem = []
+            for (let item of products){
+                // Does item has the product title including the passing one?
+                if(productName){
+                    const productRegex = new RegExp(productName, "i")
+                    if(item.title.search(productRegex) !== -1){                        
+                        foundItem.push(item)
+                    }
+                }
+                // Does it have the category passed in
+                else if(productCategory) {
+                    const categoryRegex = new RegExp(productCategory, "i")
+                    if(item.category.search(categoryRegex) !== -1){
+                        foundItem.push(item)
+                    }
+                }
+                // Does it have the price passed in?
+                else if(productPrice){
+                    if(item.price === productPrice){
+                        foundItem.push(item)
+                    }
+                }else{
+                    return
+                }
+                    
+            }
+            setElmntList(foundItem)            
+        }else{
+            setIsSearch(false)
+            setElmntList(products.slice(startProduct, endProduct))
+        }
+        
+        
+    },[searchParams,products])
     const addToCard = (e,item)=>{
         //Add this id inside the card context
         setCards(card => [{
@@ -58,11 +87,11 @@ export const Product = () => {
         }else{
             setEndProduct(productLength)
         }
-        
-
     }
     const viewAllProduct = ()=>{
         setIsSearch(false)
+        setElmntList(products.slice(startProduct, endProduct))
+        navigate("/")
     }
     
     return(
@@ -98,7 +127,6 @@ export const Product = () => {
                 }
 
             </div>
-            
             {endProduct < products.length && <button className='readMore-btn' onClick={viewMore}>View more</button>}
         </div>
     )

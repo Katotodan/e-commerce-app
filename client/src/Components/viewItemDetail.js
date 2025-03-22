@@ -1,4 +1,4 @@
-import {useParams, Link} from "react-router-dom"
+import {useParams, Link} from "react-router"
 import { useEffect, useState } from "react"
  
 export const ViewItemDetail = () =>{
@@ -16,7 +16,7 @@ export const ViewItemDetail = () =>{
                <div 
                 key={element._id} 
                 onClick={ () =>{
-                setCurrentItem(element._id)
+                // setCurrentItem(element._id)
                 divClicked(element._id)
                 }}>
                     <Link to ={`/${element._id}`}>
@@ -49,3 +49,6 @@ export const ViewItemDetail = () =>{
         </div>
     )
 }
+// This notation is wrong, it is not the viewItemDetail component. Add space at the 
+// End of view component element, figure it out why the left search is not containing the
+// hold screen on small screen

@@ -1,12 +1,22 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "./leftmenu.css"
 import { useNavigate } from "react-router";
+import { useLocation } from 'react-router'
 
-export const LeftMenu = ({handleSubit}) => {
+export const LeftMenu = ({hideLeftMenuOnSmallDivice}) => {
     let navigate = useNavigate();
+    let location = useLocation()
     const [inputName, setInputName] = useState("")
     const [category, setCategory] = useState("")
     const [price, setPrice] = useState(0)
+
+    useEffect(()=>{
+        if(location.pathname === "/"){
+            setInputName("")
+            setCategory("")
+            setPrice(0)
+        }                
+    },[location])
     const handleChange = (e)=>{
         switch (e.target.name) {
             case "inputName":
@@ -32,7 +42,10 @@ export const LeftMenu = ({handleSubit}) => {
        if(price > 0){
         searchQuery == "" ? searchQuery = searchQuery + `price=${price}` : searchQuery = searchQuery + "&" + `price=${price}`
        } 
-       navigate(`/search?${searchQuery}`);
+       if(inputName || category){
+        hideLeftMenuOnSmallDivice()
+        navigate(`/search?${searchQuery}`)
+       }  
     }
   return ( 
     <div className="left--menu">
@@ -44,7 +57,7 @@ export const LeftMenu = ({handleSubit}) => {
                     placeholder="Search item by name" 
                     className="left-search"
                     name='inputName'
-                    value={inputName} onChange={handleChange} required/>
+                    value={inputName} onChange={handleChange}/>
 
                 </div>
                 <div>

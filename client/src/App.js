@@ -9,8 +9,6 @@ import {Navigate, Outlet, useSearchParams } from "react-router-dom"
 import { CardContext,ProductContext, SearchContext, UserContext} from "./context";
 
 export function App() {
-  
-  const [allProduct, setAllProduct] = useState([])
   const [products, setProducts] = useState([]);
   const [cards, setCards] = useState([]);
   const [isSearch, setIsSearch] = useState(false)
@@ -25,7 +23,6 @@ export function App() {
         .then(res => {
             const data = res.data.products
             setProducts(data)  
-            setAllProduct(data)
         })
         .catch(error => {
           console.error(error)
@@ -50,6 +47,10 @@ export function App() {
       dropdown.classList.remove("active")
     })
   }
+  const hideLeftMenuOnSmallDivice = ()=>{
+    const screenWidth = window.innerWidth
+    if(screenWidth < 768) toggleLeftMenu()    
+  }
   const toggleLeftMenu = ()=>{
     rightContent.current.classList.toggle("inactive")
     leftMenu.current.classList.toggle("inactive")
@@ -57,6 +58,7 @@ export function App() {
     leftMenu.current.classList.toggle("active")
     setViewSearchBtn(!viewSearchBtn)
   }
+  
   
   return (
     <UserContext.Provider value={{ userInfo, setUserInfo}}>
@@ -69,7 +71,7 @@ export function App() {
               {viewSearchBtn && <button className="search-btn" onClick={toggleLeftMenu}> &#x1F50D; </button>}
               {!viewSearchBtn && <button className="search-btn" onClick={toggleLeftMenu}> &#10060; </button>}
               <div className="left-container inactive" ref={leftMenu}>
-                <LeftMenu/>
+                <LeftMenu hideLeftMenuOnSmallDivice={hideLeftMenuOnSmallDivice}/>
               </div>
               
               <div className="right-container active" ref={rightContent} onClick={() => setIsSearch(false)}> 
@@ -84,7 +86,4 @@ export function App() {
     </UserContext.Provider>
   );
 }
-// Working on search functionality, what is search variable, what is his purpose? as well
-// as path and the contuine
-
 
