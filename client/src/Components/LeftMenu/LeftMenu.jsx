@@ -1,18 +1,19 @@
 import React, {useState} from 'react'
 import "./leftmenu.css"
+import { useNavigate } from "react-router";
 
 export const LeftMenu = ({handleSubit}) => {
+    let navigate = useNavigate();
     const [inputName, setInputName] = useState("")
-    const [campany, setCampany] = useState("")
+    const [category, setCategory] = useState("")
     const [price, setPrice] = useState(0)
     const handleChange = (e)=>{
         switch (e.target.name) {
             case "inputName":
                 setInputName(e.target.value)
                 break;
-            case "campany":
-                setCampany(e.target.value)
-                
+            case "category":
+                setCategory(e.target.value)
                 break;
             case "price":
                 setPrice(e.target.value)
@@ -21,32 +22,37 @@ export const LeftMenu = ({handleSubit}) => {
                 break;
         }
     } 
-    const sub = (e) =>{
+    const handleSubmit = (e) =>{
         e.preventDefault()
-        handleSubit(inputName,campany,price)
-        setInputName("")
-        setCampany("")
-        setPrice(0)
+       let searchQuery = ""
+       if (inputName) searchQuery = searchQuery + `productname=${inputName}`
+       if (category){
+        searchQuery == "" ? searchQuery = searchQuery + `category=${category}` : searchQuery = searchQuery + "&" + `category=${category}`
+       } 
+       if(price > 0){
+        searchQuery == "" ? searchQuery = searchQuery + `price=${price}` : searchQuery = searchQuery + "&" + `price=${price}`
+       } 
+       navigate(`/search?${searchQuery}`);
     }
   return ( 
     <div className="left--menu">
-            <form onSubmit={sub}>
-                <h2>Do you searching here</h2>
+            <form onSubmit={handleSubmit}>
+                <h2>Filter by your preferences</h2>
                 <div>
-                    <label htmlFor="">Search by name</label>
+                    <label htmlFor="">Filter by product</label>
                     <input 
-                    placeholder="Search by item name" 
+                    placeholder="Search item by name" 
                     className="left-search"
                     name='inputName'
                     value={inputName} onChange={handleChange} required/>
 
                 </div>
                 <div>
-                    <label htmlFor="">Campany name</label>
+                    <label htmlFor="">Category</label>
                     <input
-                    placeholder="Campany"
-                    value={campany}
-                    name='campany'
+                    placeholder="Category"
+                    value={category}
+                    name='category'
                     onChange={handleChange}
                 />
                 </div>

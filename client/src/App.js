@@ -3,7 +3,7 @@ import Header from "./Components/Navbar/Header";
 import { LeftMenu } from "./Components/LeftMenu/LeftMenu";
 import "./app.css"
 import axios from 'axios'
-import {Navigate, Outlet, useLocation } from "react-router-dom"
+import {Navigate, Outlet, useSearchParams } from "react-router-dom"
 
 // Cards context
 import { CardContext,ProductContext, SearchContext, UserContext} from "./context";
@@ -14,7 +14,6 @@ export function App() {
   const [products, setProducts] = useState([]);
   const [cards, setCards] = useState([]);
   const [isSearch, setIsSearch] = useState(false)
-  const location = useLocation();
   const [userInfo, setUserInfo] = useState(null)
   const leftMenu = useRef(null)
   const rightContent = useRef(null)
@@ -36,31 +35,6 @@ export function App() {
     fecthData()
     
 }, [])
-
-useEffect(()=>{
-  if(location.pathname === "/" && isSearch === false){
-    setProducts(allProduct) 
-  }else{
-    setIsSearch(false)
-  }
-  
-},[location])
-
-useEffect(()=>{
-  if(!isSearch){
-    setProducts(allProduct) 
-  }
-  
-},[isSearch])
-
-  const submitFunc = (inputName,campany,price) => {
-    // Redirect to home
-    setIsSearch(true)
-    // Change the product arr
-    const regex = new RegExp(inputName, 'i');
-    setProducts((prev) => allProduct.filter(el => regex.test(el["title"])))    
-      
-  } 
 
   const hidedropdown = (e) =>{
     const isDropdownBtn = e.target.getAttribute('data-dropdown-button')
@@ -95,7 +69,7 @@ useEffect(()=>{
               {viewSearchBtn && <button className="search-btn" onClick={toggleLeftMenu}> &#x1F50D; </button>}
               {!viewSearchBtn && <button className="search-btn" onClick={toggleLeftMenu}> &#10060; </button>}
               <div className="left-container inactive" ref={leftMenu}>
-                <LeftMenu handleSubit = {submitFunc}/>
+                <LeftMenu/>
               </div>
               
               <div className="right-container active" ref={rightContent} onClick={() => setIsSearch(false)}> 
@@ -110,5 +84,7 @@ useEffect(()=>{
     </UserContext.Provider>
   );
 }
+// Working on search functionality, what is search variable, what is his purpose? as well
+// as path and the contuine
 
 

@@ -5,7 +5,7 @@ import {App} from './App';
 import {Product} from './Components/Product/Product.jsx';
 import {Item} from './Components/Item/item.js';
 import NotFind from './Components/notFind.js';
-import FindElmnt from './Components/searchResult';
+import { ViewItemDetail } from './Components/viewItemDetail.js';
 import { Card } from './Components/Card/Card.jsx';
 
 import { SignIn } from './pages/SignUp.js';
@@ -16,7 +16,7 @@ import { UserContext } from './context.js';
 import {
   createBrowserRouter,
   RouterProvider,
-} from "react-router-dom";
+} from "react-router";
 
 const route = createBrowserRouter([
   {
@@ -29,6 +29,10 @@ const route = createBrowserRouter([
         element:<Product/>
       },
       {
+        path:"/search",
+        element:<Product/>
+      },
+      {
         path:"/card",
         element:<Card/>
       },
@@ -38,7 +42,7 @@ const route = createBrowserRouter([
       },
       {
         path:"/view/item/:params",
-        element:<FindElmnt/>
+        element:<ViewItemDetail/>
       }
     ]
   },
@@ -62,8 +66,6 @@ root.render(
     <RouterProvider router={route}/>
   </div>
 );
-// Putting the router into App.js 
-
 
 
 

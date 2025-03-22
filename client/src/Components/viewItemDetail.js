@@ -1,7 +1,7 @@
 import {useParams, Link} from "react-router-dom"
 import { useEffect, useState } from "react"
  
-const FindElmnt = () =>{
+export const ViewItemDetail = () =>{
     const {params} = useParams()
     console.log(params)
     const [elmtList, setElmntList] = useState([])
@@ -49,5 +49,3 @@ const FindElmnt = () =>{
         </div>
     )
 }
-
-export default FindElmnt

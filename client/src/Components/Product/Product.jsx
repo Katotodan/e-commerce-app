@@ -3,6 +3,7 @@ import React, {useState, useEffect, useContext, useRef} from 'react'
 import { Link } from 'react-router-dom'
 import "./product.css"
 import { CardContext, ProductContext, SearchContext} from '../../context'
+import { useSearchParams } from "react-router";
 
 export const Product = () => {
     const [elmtList, setElmntList] = useState([])
@@ -10,7 +11,21 @@ export const Product = () => {
     const {products} = useContext(ProductContext);
     const [startProduct, setStartProduct] = useState(0)
     const [endProduct, setEndProduct] = useState(10)
-    const {isSearch, setIsSearch} = useContext(SearchContext)
+    const [isSearch, setIsSearch] = useState(false)
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    useEffect(()=>{
+        const productName = searchParams.get("productname")
+        const productCategory = searchParams.get("category")
+        const productPrice = searchParams.get("price")
+        if(productName || productCategory || productPrice){
+            setIsSearch(true)
+        }else{
+            setIsSearch(false)
+        }
+        
+        
+    },[searchParams])
 
     useEffect(()=>{
         setElmntList(products.slice(startProduct, endProduct))
@@ -53,7 +68,7 @@ export const Product = () => {
     return(
         <div className="right--main">
             <h2 className="welcome--text">Welcome to our E-commerce</h2>
-            {isSearch && <button onClick={viewAllProduct} className='back-btn'>Back</button>}
+            {isSearch && <button onClick={viewAllProduct} className='back-btn'>Clear Filter</button>}
             <div className='flex-container'>
                 {
                     elmtList.map((element) => (
@@ -61,11 +76,7 @@ export const Product = () => {
                             <div className='img-container'>
                                 <img src={element.images[0]} className="main--img" alt="Item picture" 
                                 loading='lazy' 
-                                onLoad={(e) => {
-                                    e.target.parentElement.classList.add("loaded")
-                                    console.log(e.target.parentElement);
-                                    
-                                    }}/>
+                                onLoad={(e) => e.target.parentElement.classList.add("loaded")}/>
                             </div>
                             
                             <h3>{element.title}</h3>
