@@ -1,19 +1,19 @@
-import React, {useState, useEffect, useContext, useRef} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 
 import { Link } from 'react-router-dom'
 import "./product.css"
-import { CardContext, ProductContext, SearchContext} from '../../context'
+import { CardContext, ProductContext} from '../../context'
 import { useSearchParams, useNavigate } from "react-router";
 
 export const Product = () => {
     let navigate = useNavigate();
     const [elmtList, setElmntList] = useState([])
-    const {setCards} = useContext(CardContext);
-    const {products} = useContext(ProductContext);
-    const [startProduct, setStartProduct] = useState(0)
+    const {setCards} = useContext(CardContext)
+    const {products} = useContext(ProductContext)
     const [endProduct, setEndProduct] = useState(10)
     const [isSearch, setIsSearch] = useState(false)
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams()
+    const startProduct= 0
 
     useEffect(()=>{
         setElmntList(products.slice(startProduct, endProduct))
@@ -103,7 +103,7 @@ export const Product = () => {
                     elmtList.map((element) => (
                         <div key={element.id}>
                             <div className='img-container'>
-                                <img src={element.images[0]} className="main--img" alt="Item picture" 
+                            <img src={element.images[0]} className="main--img" alt={element.title +"picture"} 
                                 loading='lazy' 
                                 onLoad={(e) => e.target.parentElement.classList.add("loaded")}/>
                             </div>

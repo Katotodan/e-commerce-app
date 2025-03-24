@@ -37,10 +37,10 @@ export const LeftMenu = ({hideLeftMenuOnSmallDivice}) => {
        let searchQuery = ""
        if (inputName) searchQuery = searchQuery + `productname=${inputName}`
        if (category){
-        searchQuery == "" ? searchQuery = searchQuery + `category=${category}` : searchQuery = searchQuery + "&" + `category=${category}`
+        searchQuery === "" ? searchQuery += `category=${category}` : searchQuery += "&" + `category=${category}`
        } 
        if(price > 0){
-        searchQuery == "" ? searchQuery = searchQuery + `price=${price}` : searchQuery = searchQuery + "&" + `price=${price}`
+        searchQuery === "" ? searchQuery += `price=${price}` : searchQuery += "&" + `price=${price}`
        } 
        if(inputName || category ||price){
         hideLeftMenuOnSmallDivice()
@@ -71,9 +71,9 @@ export const LeftMenu = ({hideLeftMenuOnSmallDivice}) => {
                 </div>
                 <div>
                     <label htmlFor="price">Price: </label>
-                    <input id="price" 
+                    <input id="price" min={0}
                     type="number"  
-                    name='price' value={price}
+                    name='price' value={price>0 ? price : ""}
                     className='price'
                     onChange={handleChange}
                     placeholder=""/>

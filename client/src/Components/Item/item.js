@@ -1,4 +1,4 @@
-import {useEffect, useState, useContext, useRef} from "react"
+import {useEffect, useState, useContext} from "react"
 import {useParams} from "react-router"
 import {  } from "../../App"
 import { ProductContext, CardContext} from "../../context"
