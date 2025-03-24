@@ -5,7 +5,10 @@ const getAllProducts = async(req,res,next) =>{
         const allProducts = await productModel.find()
         res.status(200).json(allProducts)
     } catch (error) {
-        next(error)
+        res.status(500).json({
+            status: "fail",
+            message: error.message
+        })
     }
 }
 const getProductById = async(req,res, next) =>{
@@ -29,7 +32,10 @@ const getProduct = async(req,res,next) =>{
         const product = await productModel.find(queryParams)
         res.status(200).send(product)
     } catch (error) {
-        next(error)
+        res.status(500).json({
+            status: "fail",
+            message: error.message
+        })
     }
 }
 const addProduct = async(req,res,next) =>{
@@ -37,7 +43,10 @@ const addProduct = async(req,res,next) =>{
         const product = await productModel.create(req.body)
         res.status(200).json(product)
     } catch (error) {
-        next(error)
+        res.status(500).json({
+            status: "fail",
+            message: error.message
+        })
     }
 }
 const updateProduct = async(req, res, next) =>{
@@ -46,7 +55,10 @@ const updateProduct = async(req, res, next) =>{
         .findByIdAndUpdate(req.params.id, req.body, {new: true})
         res.status(200).json(product)
     } catch (error) {
-        next(error)
+        res.status(500).json({
+            status: "fail",
+            message: error.message
+        })
     }
 }
 
@@ -58,7 +70,10 @@ const deleteProduct = async(req, res, next) =>{
             [product.name]: "has been deleted"
         })
     } catch (error) {
-        next(error)
+        res.status(500).json({
+            status: "fail",
+            message: error.message
+        })
     }
 }
 
