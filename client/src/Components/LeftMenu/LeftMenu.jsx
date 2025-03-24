@@ -8,7 +8,7 @@ export const LeftMenu = ({hideLeftMenuOnSmallDivice}) => {
     let location = useLocation()
     const [inputName, setInputName] = useState("")
     const [category, setCategory] = useState("")
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState("")
 
     useEffect(()=>{
         if(location.pathname === "/"){
@@ -42,7 +42,7 @@ export const LeftMenu = ({hideLeftMenuOnSmallDivice}) => {
        if(price > 0){
         searchQuery == "" ? searchQuery = searchQuery + `price=${price}` : searchQuery = searchQuery + "&" + `price=${price}`
        } 
-       if(inputName || category){
+       if(inputName || category ||price){
         hideLeftMenuOnSmallDivice()
         navigate(`/search?${searchQuery}`)
        }  
@@ -72,10 +72,12 @@ export const LeftMenu = ({hideLeftMenuOnSmallDivice}) => {
                 <div>
                     <label htmlFor="price">Price: </label>
                     <input id="price" 
-                    type="number" value={price} 
-                    name='price'
+                    type="number"  
+                    name='price' value={price}
                     className='price'
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    placeholder=""/>
+                    
                 </div>
                 <button type="submit">Search</button>
             </form> 

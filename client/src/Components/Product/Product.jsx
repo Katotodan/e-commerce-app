@@ -127,7 +127,8 @@ export const Product = () => {
                 }
 
             </div>
-            {endProduct < products.length && <button className='readMore-btn' onClick={viewMore}>View more</button>}
+            {endProduct < products.length && !isSearch && <button className='readMore-btn' onClick={viewMore}>View more</button>}
+            
         </div>
     )
 }

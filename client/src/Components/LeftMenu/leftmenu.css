@@ -1,7 +1,7 @@
 .left--menu{
     background-color: var(--secondary--color);
     width: 100%;
-    height: 100% !important;
+    height: calc(100vh - 5.5rem) !important;
     padding: 2rem 1rem;
 }
 .left--menu h2{
@@ -44,3 +44,9 @@
     font-size: larger;
     cursor: pointer;
 } 
+ /*Larger screen  */
+ @media (min-width: 768px) {
+    .left--menu{
+        height: 100% !important;
+    }
+ }
