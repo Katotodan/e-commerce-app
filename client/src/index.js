@@ -5,7 +5,7 @@ import {App} from './App';
 import {Product} from './Components/Product/Product.jsx';
 import {Item} from './Components/Item/item.js';
 import NotFind from './Components/notFind.js';
-import { ViewItemDetail } from './Components/viewItemDetail.js';
+// import { ViewItemDetail } from './Components/viewItemDetail.js';
 import { Card } from './Components/Card/Card.jsx';
 
 import { SignIn } from './pages/SignUp.js';
@@ -39,10 +39,6 @@ const route = createBrowserRouter([
       {
         path:"/:id",
         element:<Item/>
-      },
-      {
-        path:"/view/item/:params",
-        element:<ViewItemDetail/>
       }
     ]
   },
