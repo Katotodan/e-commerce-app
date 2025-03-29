@@ -11,7 +11,7 @@ const login = async (req, res, next) => {
         if(user){
             const match = await bcrypt.compare(req.body.password, user.password)
             if(match){
-                const token = jwt.sign({"username": user.username}, process.env.SECRET_KEY, { expiresIn: '240s'});
+                const token = jwt.sign({"username": user.username}, process.env.SECRET_KEY, { expiresIn: '1d'});
                 res.status(200).json({user, token})
             }else{
                 throw new Error("Username and password doesn't match")
@@ -44,7 +44,7 @@ const signUp = async (req, res, next) => {
             if(hash){
                 const newUser = await userModel.create({username: req.body.username, password: hash})
                 // Add token
-                const token = jwt.sign({"username": user.username}, process.SECRET_KEY, { expiresIn: '240s'});
+                const token = jwt.sign({"username": user.username}, process.SECRET_KEY, { expiresIn: '1d'});
                 res.setHeader('Authorization', `Bearer ${token}`);
                 res.status(200).json({user, token})
             }else{
