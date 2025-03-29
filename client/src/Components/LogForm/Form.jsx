@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import "./form.css"
 
-export const Form = ({title, submit}) => {
+export const Form = ({title, submit, errorMsg}) => {
     const [userCreditial, setUserCreditial] = useState({
         username: "",
         password: "",
@@ -24,16 +24,16 @@ export const Form = ({title, submit}) => {
             submit(userCreditial) 
         }}>
             <h2>{title}</h2>
-            <p className="message"></p>
+            <p className="message">{errorMsg}</p>
             <div>
                 <label htmlFor="email">Enter Username or email</label>
                 <input type="text" id="email" value={userCreditial.username}  name="username" 
-                placeholder="Username or email" onChange={handleChange}/>
+                placeholder="Username or email" onChange={handleChange} required/>
             </div> 
             <div>
                 <label htmlFor="password">Enter Password</label>
                 <input type="password" id="password" value={userCreditial.password} name="password"
-                placeholder=" Password" onChange={handleChange}/>
+                placeholder=" Password" onChange={handleChange} required/>
             </div>
             {title === "Log in" ? (
                 <div> 

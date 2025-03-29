@@ -8,7 +8,7 @@ const PORT = 8080
 // Middleware
 app.use(cors({
     origin:"http://localhost:3000",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: [
         'Content-Type', 
         'Authorization', 
@@ -20,10 +20,13 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use("", routes)
+app.get("/test", (req, res)=>{
+    res.send("<h2>Trying succeded</h2>")
+})
 const startApp = async() =>{
     try {
         await dbConnection()
-        app.listen(PORT, console.log('Server is listening on port' +PORT+'....'))
+        app.listen(PORT, console.log('Server is listening on port ' +PORT+'....'))
     } catch (error) {
         console.log(error)
     }

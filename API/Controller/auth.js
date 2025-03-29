@@ -2,21 +2,20 @@ const {userModel} = require("../DB/model.js")
 const jwt = require("jsonwebtoken")
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+require('dotenv').config()
 
 
 const login = async (req, res, next) => {
     try {
         const user = await userModel.findOne({username: req.body.username}).exec()
         if(user){
-            if(bcrypt.compare(req.body.password,user.password)){
-                // Add token
-                const token = jwt.sign({"username": user.username}, 'secret', { expiresIn: '60s'});
+            const match = await bcrypt.compare(req.body.password, user.password)
+            if(match){
+                const token = jwt.sign({"username": user.username}, process.env.SECRET_KEY, { expiresIn: '240s'});
                 res.status(200).json({user, token})
-
-            }else{                
+            }else{
                 throw new Error("Username and password doesn't match")
             }
-            
             
         }else{
             res.status(404).json({
@@ -36,20 +35,22 @@ const login = async (req, res, next) => {
 }
 const signUp = async (req, res, next) => {
     try {
-        const hash = await bcrypt.hash(req.body.password, saltRounds)        
-        if(hash){
-            const user = await userModel.create({username: req.body.username, password: hash})
-            // Add token
-            const token = jwt.sign({"username": user.username}, 'secret', { expiresIn: '60s'});
-            res.setHeader('Authorization', `Bearer ${token}`);
-            res.status(200).json({user, token})
-
-
+        const user = await userModel.findOne({username: req.body.username}).exec()
+        if(user){
+            // Can't sign up, user already exist
+            throw new Error('Username already exist')
         }else{
-            if(err) throw new Error('Can not hash the password');
-
+            const hash = await bcrypt.hash(req.body.password, saltRounds)        
+            if(hash){
+                const newUser = await userModel.create({username: req.body.username, password: hash})
+                // Add token
+                const token = jwt.sign({"username": user.username}, process.SECRET_KEY, { expiresIn: '240s'});
+                res.setHeader('Authorization', `Bearer ${token}`);
+                res.status(200).json({user, token})
+            }else{
+                if(err) throw new Error('Can not hash the password')
+            }
         }
-        ;
         
     } catch (error) {
         res.status(500).json({
@@ -62,7 +63,7 @@ const signUp = async (req, res, next) => {
 }
 const logOut = async (req, res, next) => {
     try {
-        jwt.sign(req.user, 'secret', { expiresIn: 0});
+        jwt.sign(req.user, process.SECRET_KEY, { expiresIn: 0});
         res.status(204).json({
             status: "deleted"
         })
@@ -73,6 +74,22 @@ const logOut = async (req, res, next) => {
             message: error.message
         })
     }
-
 }
-module.exports = {login, logOut, signUp}
+const getUser = async(req,res)=>{
+    try {
+        const token = req.headers["authorization"]?.split(" ")[1];
+        
+        if (!token) return res.sendStatus(401);
+
+        jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
+            if (err)return res.status(403).json({message: "Session expired"})
+            req.user = user;
+            res.status(200).json({user})
+        });
+    } catch (error) {
+        res.status(401).json({err: error.message})
+    }
+}
+module.exports = {login, logOut, signUp, getUser}
+
+// Understanding jsonwebtoken and contuine working on the log in functionality

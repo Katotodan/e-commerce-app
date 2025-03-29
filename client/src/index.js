@@ -14,6 +14,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
+import { loaderOnLogIn } from './loaders.js';
 
 const route = createBrowserRouter([
   {
@@ -42,6 +43,8 @@ const route = createBrowserRouter([
   {
     path:"/login",
     element:<LogIn/>,
+    hydrateFallbackElement: <h2>Loading</h2>,
+    loader: loaderOnLogIn,
     errorElement: <NotFind/>
   },
   {
