@@ -1,22 +1,29 @@
-import React, {useState, useContext, useRef} from 'react'
+import React, {useState, useContext, useRef, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import "./header.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { useLoaderData } from "react-router"
 import { CardContext } from '../../context';
+import { useNavigate } from "react-router"
+
 
 const Header = () => {
-  const [isUserSignIn, setIsUserSignIn] = useState(true)
+  const username = useLoaderData()
   const {cards} = useContext(CardContext)
   const dropdownContainer = useRef(null)
+  const navigate = useNavigate()
+  
   const hideDropDown = () =>{
     if(dropdownContainer) dropdownContainer.current.classList.toggle("active")
   }
   const login = () =>{
     hideDropDown()
+    navigate("/login")
   }
   const logOut = () =>{
     hideDropDown()
+    // Remove token and user
+    sessionStorage.removeItem("eCommerceToken")
+    navigate("/login")
   }
   return (
     <nav>
@@ -41,16 +48,16 @@ const Header = () => {
             </ul>
               
             <div >
-              {isUserSignIn ? (
+              {username ? (
                 <div className='logout-container'>
                 <button>
                   <img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" 
                   alt="User Icon"/>
                 </button>
-                <div> <Link to="/login" className='logIn--btn' onClick={logOut}>Log out</Link></div> 
+                <div> <button className='logIn--btn' onClick={logOut}>Log out</button></div> 
                 </div>
               
-              ): <Link to="/login" className='logIn--btn' onClick={login}>Log in</Link>}
+              ): <button className='logIn--btn' onClick={login}>Log in</button>}
                
             </div>
           </div>

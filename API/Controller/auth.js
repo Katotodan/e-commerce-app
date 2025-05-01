@@ -44,15 +44,15 @@ const signUp = async (req, res, next) => {
             if(hash){
                 const newUser = await userModel.create({username: req.body.username, password: hash})
                 // Add token
-                const token = jwt.sign({"username": user.username}, process.SECRET_KEY, { expiresIn: '1d'});
+                const token = jwt.sign({"username": newUser.username}, process.env.SECRET_KEY, { expiresIn: '1d'});
                 res.setHeader('Authorization', `Bearer ${token}`);
-                res.status(200).json({user, token})
+                res.status(200).json({newUser, token})
             }else{
                 if(err) throw new Error('Can not hash the password')
             }
         }
         
-    } catch (error) {
+    } catch (error) {        
         res.status(500).json({
             status: "fail",
             message: error.message

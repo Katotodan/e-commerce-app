@@ -14,17 +14,19 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
-import { loaderOnLogIn } from './loaders.js';
+import { loaderOnLogIn, getUserLoader } from './loaders.js';
 
 const route = createBrowserRouter([
   {
     path:"/",
     element:<App/>,
+    hydrateFallbackElement: <h2>Loading...</h2>,
+    loader: getUserLoader,
     errorElement: <NotFind/>,
     children:[
       {
         path:"/",
-        element:<Product/>
+        element:<Product/>,        
       },
       {
         path:"/search",
@@ -62,6 +64,7 @@ root.render(
     <RouterProvider router={route}/>
   </div>
 );
+// Next working on buy functionality
 
 
 

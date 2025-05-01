@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import "./form.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-export const Form = ({title, submit, errorMsg}) => {
+export const Form = ({title, submit, errorMsg, isLoading}) => {
     const [userCreditial, setUserCreditial] = useState({
         username: "",
         password: "",
         password2: ""
-
     })
     
     const handleChange = (e) =>{
@@ -16,6 +17,7 @@ export const Form = ({title, submit, errorMsg}) => {
             [e.target.name]: e.target.value
         })
     }
+
   return (
     <div className="log--form">
         <h1>Welcome to E-com</h1>
@@ -42,8 +44,8 @@ export const Form = ({title, submit, errorMsg}) => {
             ):(
                 <>
                 <div>
-                <label htmlFor="password">User Password</label>
-                <input id="password" type="password" placeholder=" Confirm password" 
+                <label htmlFor="password">Confirm Password</label>
+                <input id="password2" type="password" placeholder=" Confirm password" 
                 value={userCreditial.password2} name="password2" onChange={handleChange}/>
                 </div>
                 <div>
@@ -52,10 +54,13 @@ export const Form = ({title, submit, errorMsg}) => {
                 </>
             )}
 
-            <button type="submit">{title}</button>
+            <button type="submit">
+                {isLoading ? <FontAwesomeIcon icon={faSpinner} spin /> : title}
+                
+                
+            </button>
         </form>
     </div>
             
   )
-}
-
+} 

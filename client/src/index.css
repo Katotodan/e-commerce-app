@@ -29,4 +29,8 @@ code {
 .link{
   text-decoration: none;
   color: black !important;
+  cursor: pointer;
+}
+button{
+  cursor: pointer;
 }

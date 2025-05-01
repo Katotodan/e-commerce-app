@@ -57,7 +57,7 @@ nav ul li:last-of-type span{
     border-radius: 50%;
     position: absolute;
     right: -1rem;
-    top: -1rem;
+    top: -0.4rem;
     color: white;
     text-align: center;
     width: auto;
@@ -66,10 +66,10 @@ nav ul li:last-of-type span{
     align-items: center;
     font-size: medium;
 }
-nav .logIn--btn{
+.logIn--btn{
     text-decoration: none;
     color: black;
-    background-color: var(--primary--color);
+    background-color: var(--primary--color) !important;
     padding: 0.5rem 1rem;
     border-radius: 5px;
 }
