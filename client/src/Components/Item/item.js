@@ -38,7 +38,7 @@ export function Item(){
         e.target.disabled = true
         e.target.style.cursor = "not-allowed"
         setTimeout(() => {
-            e.target.innerHTML = 'Add again'
+            e.target.innerHTML = 'Add it again'
             e.target.disabled = false
             e.target.style.cursor = "pointer" 
         }, 1000);
