@@ -16,6 +16,7 @@ export function App() {
   const leftMenu = useRef(null)
   const rightContent = useRef(null)
   const [viewSearchBtn, setViewSearchBtn] = useState(true)
+  const isFirstRender = useRef(true)
   
   useEffect(() =>{ 
     const fecthData = () =>{
@@ -31,7 +32,18 @@ export function App() {
     }
     fecthData()
     
-}, [])
+  }, [])
+  useEffect(() =>{
+    if (isFirstRender.current) {
+      // Check if the card session is already there
+      if(sessionStorage.getItem('card')){
+        setCards(JSON.parse(sessionStorage.getItem('card')))
+      }
+      isFirstRender.current = false; // Mark that it's no longer the first render
+    } else {
+      sessionStorage.setItem('card', JSON.stringify(cards))
+    }
+  }, [cards])
 
   const hidedropdown = (e) =>{
     const isDropdownBtn = e.target.getAttribute('data-dropdown-button')

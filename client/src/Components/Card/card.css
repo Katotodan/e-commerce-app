@@ -50,6 +50,7 @@ h2{
     margin-top: 1rem;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 0.5rem;
 }
 .no-item{
     text-align: center;

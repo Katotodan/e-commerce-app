@@ -28,7 +28,15 @@ export const LogIn = () =>{
                 // Save token and user
                 sessionStorage.setItem("eCommerceToken", token)
                 setIsLogin(false)
-                navigate("/")
+                // Test if we should redirect to the buy page or not
+                const shouldBuy = sessionStorage.getItem("shouldBuy")
+                if(shouldBuy){
+                    // Redict to buying page
+                    sessionStorage.setItem("shouldBuy", false)
+                    navigate('/buy')
+                }else{
+                    navigate("/")
+                }
             }).catch(err => {
                 // Show error message
                 err.response?.data.message ? setErrorMsg(err.response.data.message) : setErrorMsg(err.message)    

@@ -119,7 +119,7 @@ export const Product = () => {
                             <div>
                                 <button type="button" onClick={(e) => addToCard(e,element)}>Add to card</button>
                                 <button type="button">
-                                    <Link to={`/${element.id}`} className='link'>View details</Link>
+                                    <Link to={`/view/${element.id}`} className='link'>View details</Link>
                                 </button>
                             </div>
                         </div> 

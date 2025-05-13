@@ -10,7 +10,7 @@ export function Item(){
     const {id}= useParams()
     const {products} = useContext(ProductContext)
     const [product,setProduct] = useState([])
-    const {setCards} = useContext(CardContext);
+    const {setCards, cards} = useContext(CardContext);
 
     useEffect(()=>{
         setProduct(products.filter(el => el.id === id))        

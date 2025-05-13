@@ -6,7 +6,7 @@ import {Product} from './Components/Product/Product.jsx';
 import {Item} from './Components/Item/item.js';
 import NotFind from './Components/notFind.js';
 import { Card } from './Components/Card/Card.jsx';
-
+import { Buypage } from './pages/BuyPage/Buypage.jsx';
 import { SignIn } from './pages/SignUp.js';
 import { LogIn } from './pages/LogIn.js';
  
@@ -22,7 +22,6 @@ const route = createBrowserRouter([
     element:<App/>,
     hydrateFallbackElement: <h2>Loading...</h2>,
     loader: getUserLoader,
-    errorElement: <NotFind/>,
     children:[
       {
         path:"/",
@@ -37,8 +36,11 @@ const route = createBrowserRouter([
         element:<Card/>
       },
       {
-        path:"/:id",
+        path:"/view/:id",
         element:<Item/>
+      },{
+        path: "/buy",
+        element: <Buypage/>
       }
     ]
   },
@@ -53,18 +55,16 @@ const route = createBrowserRouter([
     path:"/signup",
     element:<SignIn/>,
     errorElement: <NotFind/>
+  },{
+    path: "*",
+    element: <h1>Page not found</h1>
   }
 ])
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
   <div>
     <RouterProvider router={route}/>
-  </div>
+  </div>  
 );
-// Next working on buy functionality
-
-
-
