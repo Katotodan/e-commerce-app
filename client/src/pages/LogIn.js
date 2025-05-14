@@ -29,11 +29,11 @@ export const LogIn = () =>{
                 sessionStorage.setItem("eCommerceToken", token)
                 setIsLogin(false)
                 // Test if we should redirect to the buy page or not
-                const shouldBuy = sessionStorage.getItem("shouldBuy")
-                if(shouldBuy){
+                const shouldBuy = sessionStorage.getItem("shouldBuy")                
+                if(shouldBuy !== 'false'){
                     // Redict to buying page
-                    sessionStorage.setItem("shouldBuy", false)
-                    navigate('/buy')
+                    sessionStorage.setItem("shouldBuy", 'false')
+                    navigate('/card')
                 }else{
                     navigate("/")
                 }

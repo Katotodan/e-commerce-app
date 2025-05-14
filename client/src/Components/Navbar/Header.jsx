@@ -2,7 +2,7 @@ import React, {useState, useContext, useRef, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import "./header.css"
 import { useLoaderData } from "react-router"
-import { CardContext } from '../../context';
+import { CardContext } from '../../context'
 import { useNavigate } from "react-router"
 
 
@@ -11,9 +11,35 @@ const Header = () => {
   const {cards} = useContext(CardContext)
   const dropdownContainer = useRef(null)
   const navigate = useNavigate()
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 600)
+
+// Check if the windown is on small screen, 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      if(window.innerWidth > 768){
+        document.body.style.overflowY = 'auto'
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Check on mount
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])
+ 
+  const hideMainBody = () =>{
+    if(isMobile && dropdownContainer.current.classList.contains("active")){
+      document.body.style.overflowY = 'auto'
+    }else{
+      document.body.style.overflowY = 'hidden' 
+    }
+  }
+
   
   const hideDropDown = () =>{
     if(dropdownContainer) dropdownContainer.current.classList.toggle("active")
+    hideMainBody()
   }
   const login = () =>{
     hideDropDown()
@@ -25,13 +51,14 @@ const Header = () => {
     sessionStorage.removeItem("eCommerceToken")
     navigate("/login")
   }
+  
   return (
     <nav>
         <div>
           <Link to="/"> <img src="logo.png" alt="E-commerce logo" /> </Link>
         </div>
         <div className="dropdown-container" data-dropdown="dropdown" ref={dropdownContainer}>
-          <button className='menu-icon' data-dropdown-button ="dropdown-button" >&#8801;</button>
+          <button className='menu-icon' data-dropdown-button ="dropdown-button" onClick={hideMainBody}>&#8801;</button>
         
           <div>
             <ul> 
@@ -50,11 +77,9 @@ const Header = () => {
             <div >
               {username ? (
                 <div className='logout-container'>
-                <button>
-                  <img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" 
-                  alt="User Icon"/>
-                </button>
-                <div> <button className='logIn--btn' onClick={logOut}>Log out</button></div> 
+                  <span className='username'>AD</span>
+                
+                  <div> <button className='logIn--btn' onClick={logOut}>Log out</button></div> 
                 </div>
               
               ): <button className='logIn--btn' onClick={login}>Log in</button>}
@@ -67,3 +92,5 @@ const Header = () => {
 }
 
 export default Header
+// Working on the header, when clicked on a small divice, a user shouldn't be
+// able to scroll down.

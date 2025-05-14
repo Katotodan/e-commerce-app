@@ -16,7 +16,7 @@ export const Buypage = () => {
     <div>
       <h4 className='welcoming-title'>Thank you for going this far 😊😉 <br/> but this is an exprerimental 
       feature, you can not buy</h4>
-      <button className='link back-link' onClick={goBack}>Back</button>
+      <button className='link back-link' onClick={goBack}>Go back</button>
     </div>
   )
 }
