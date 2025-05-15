@@ -4,11 +4,12 @@ import './index.css';
 import {App} from './App';
 import {Product} from './Components/Product/Product.jsx';
 import {Item} from './Components/Item/item.js';
-import NotFind from './Components/notFind.js';
+import {NotFind} from './Components/notFind.js';
 import { Card } from './Components/Card/Card.jsx';
 import { Buypage } from './pages/BuyPage/Buypage.jsx';
 import { SignIn } from './pages/SignUp.js';
 import { LogIn } from './pages/LogIn.js';
+import { LoaderPage } from './pages/LoaderPage/LoaderPage.jsx';
  
 import {
   createBrowserRouter,
@@ -20,7 +21,7 @@ const route = createBrowserRouter([
   {
     path:"/",
     element:<App/>,
-    hydrateFallbackElement: <h2>Loading...</h2>,
+    hydrateFallbackElement: <LoaderPage/>,
     loader: getUserLoader,
     children:[
       {
@@ -55,9 +56,11 @@ const route = createBrowserRouter([
     path:"/signup",
     element:<SignIn/>,
     errorElement: <NotFind/>
-  },{
+  }
+  ,{
     path: "*",
-    element: <h1>Page not found</h1>
+    loader: getUserLoader,
+    element: <NotFind/>
   }
 ])
 

@@ -102,6 +102,11 @@ nav ul li button img{
     justify-content: center;
     align-items: center;
 }
+.not-found-paragraph{
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+}
 @media (min-width: 768px) {
     nav{
         height: 4rem;
@@ -135,5 +140,8 @@ nav ul li button img{
         flex-direction: row;
         align-items: center;
         gap: 4rem;
+    }
+    .not-found-paragraph{
+        font-size: 1.5rem;
     }
 }

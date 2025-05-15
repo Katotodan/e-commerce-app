@@ -10,32 +10,7 @@ const Header = () => {
   const username = useLoaderData()
   const {cards} = useContext(CardContext)
   const dropdownContainer = useRef(null)
-  const navigate = useNavigate()
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 600)
-
-// Check if the windown is on small screen, 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-      if(window.innerWidth > 768){
-        document.body.style.overflowY = 'auto'
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Check on mount
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, [])
- 
-  const hideMainBody = () =>{
-    if(isMobile && dropdownContainer.current.classList.contains("active")){
-      document.body.style.overflowY = 'auto'
-    }else{
-      document.body.style.overflowY = 'hidden' 
-    }
-  }
-
+  const navigate = useNavigate() 
   
   const hideDropDown = () =>{
     if(dropdownContainer) dropdownContainer.current.classList.toggle("active")
@@ -76,7 +51,7 @@ const Header = () => {
             <div >
               {username ? (
                 <div className='logout-container'>
-                  <span className='username'>AD</span>
+                  <span className='username'>{username.substring(0, 2).toUpperCase()}</span>
                 
                   <div> <button className='logIn--btn' onClick={logOut}>Log out</button></div> 
                 </div>
