@@ -91,5 +91,4 @@ const Header = () => {
 }
 
 export default Header
-// Working on the header, when clicked on a small divice, a user shouldn't be
-// able to scroll down.
+
