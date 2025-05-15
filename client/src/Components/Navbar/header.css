@@ -81,6 +81,7 @@ nav ul li:last-of-type span{
     justify-content: center;
     align-items: center;
     font-size: larger;
+    cursor: auto !important;
 }
 nav img, .username{
     width: 3rem;

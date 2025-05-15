@@ -39,7 +39,6 @@ const Header = () => {
   
   const hideDropDown = () =>{
     if(dropdownContainer) dropdownContainer.current.classList.toggle("active")
-    hideMainBody()
   }
   const login = () =>{
     hideDropDown()
@@ -58,7 +57,7 @@ const Header = () => {
           <Link to="/"> <img src="logo.png" alt="E-commerce logo" /> </Link>
         </div>
         <div className="dropdown-container" data-dropdown="dropdown" ref={dropdownContainer}>
-          <button className='menu-icon' data-dropdown-button ="dropdown-button" onClick={hideMainBody}>&#8801;</button>
+          <button className='menu-icon' data-dropdown-button ="dropdown-button">&#8801;</button>
         
           <div>
             <ul> 
