@@ -3,7 +3,7 @@ import Header from "./Components/Navbar/Header";
 import { LeftMenu } from "./Components/LeftMenu/LeftMenu";
 import "./app.css"
 import axios from 'axios'
-import {Navigate, Outlet, useSearchParams } from "react-router-dom"
+import {Outlet } from "react-router-dom"
 
 // Cards context
 import { CardContext,ProductContext, SearchContext, UserContext} from "./context";

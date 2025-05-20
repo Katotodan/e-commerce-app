@@ -8,7 +8,7 @@ import { useNavigate } from "react-router"
 
 export const Card = () => {
   const {cards, setCards} = useContext(CardContext)
-  const {isSearch, setIsSearch} = useContext(SearchContext)
+  const {isSearch} = useContext(SearchContext)
   const [navigateToHome, setNavigateToHome] = useState(false)
   const isFirstRender = useRef(true)
   let navigate = useNavigate()

@@ -1,6 +1,5 @@
 import {useEffect, useState, useContext} from "react"
 import {useParams} from "react-router"
-import {  } from "../../App"
 import { ProductContext, CardContext} from "../../context"
 
 
@@ -10,20 +9,13 @@ export function Item(){
     const {id}= useParams()
     const {products} = useContext(ProductContext)
     const [product,setProduct] = useState([])
-    const {setCards, cards} = useContext(CardContext);
+    const {setCards} = useContext(CardContext);
 
     useEffect(()=>{
         setProduct(products.filter(el => el.id === id))        
     }, [])
     
     useEffect(()=>{
-        // I don't have to fetch because I am using the product context now
-    //    fetch(`http://localhost:8080/getproduct/${id}`) 
-    //    .then(res => res.json())
-    //    .then(data => {
-            
-    //    })
-    
        setProduct(products.filter(el => el.id == id))
     }, [products])
 
@@ -49,7 +41,7 @@ export function Item(){
       <div className="item-container">
           <div>
               <h2>{product[0]?.title}</h2>
-              <img src={product[0]?.images[0]}/>
+              <img src={product[0]?.images[0]} alt={product[0]?.title}/>
           </div>
           <div>
               <p><strong>Category</strong>: {product[0]?.category}</p><br/>

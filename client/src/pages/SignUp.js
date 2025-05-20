@@ -1,6 +1,6 @@
+import React, {useState} from "react"
 import { Form } from "../Components/LogForm/Form"
 import axios from "axios"
-import React, {useState} from "react"
 import { useNavigate } from "react-router"
 
 export const SignIn = () =>{
@@ -15,7 +15,7 @@ export const SignIn = () =>{
             setTimeout(()=>{setErrorMsg("")}, 2000)
             setIsLogin(false)    
         }else{
-            axios.post('http://localhost:8080/signup', userCreditial, {
+            axios.post(`${process.env.REACT_APP_API_UR}/signup`, userCreditial, {
                 withCredentials: true, // Send credentials (cookies)
                 headers: {
                     'Content-Type': 'application/json',

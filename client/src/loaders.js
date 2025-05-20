@@ -6,7 +6,7 @@ export const loaderOnLogIn = async ()=>{
         const token = sessionStorage.getItem("eCommerceToken")
         
         if(token){
-            const response = await axios.get('http://localhost:8080/user', {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/user`, {
                 withCredentials: true, // Send credentials (cookies)
                 headers: {
                   'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export const getUserLoader = async () =>{
         const token = sessionStorage.getItem("eCommerceToken")
         
         if(token){
-            const response = await axios.get('http://localhost:8080/user', {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/user`, {
                 withCredentials: true, // Send credentials (cookies)
                 headers: {
                   'Content-Type': 'application/json',

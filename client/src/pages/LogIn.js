@@ -4,8 +4,6 @@ import axios from "axios"
 import { useNavigate } from "react-router"
 import { useLoaderData, Navigate  } from "react-router"
 
-
-
 export const LogIn = () =>{
     const navigate = useNavigate() 
     let {status} = useLoaderData()
@@ -18,7 +16,7 @@ export const LogIn = () =>{
 
     const handleSubmition = (userCreditial) =>{  
         setIsLogin(true)
-        axios.post('http://localhost:8080/login', userCreditial, {
+        axios.post(`${process.env.REACT_APP_API_UR}/login`, userCreditial, {
             withCredentials: true, // Send credentials (cookies)
             headers: {
               'Content-Type': 'application/json',

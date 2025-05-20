@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import "./form.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -55,9 +55,7 @@ export const Form = ({title, submit, errorMsg, isLoading}) => {
             )}
 
             <button type="submit">
-                {isLoading ? <FontAwesomeIcon icon={faSpinner} spin /> : title}
-                
-                
+                {isLoading ? <FontAwesomeIcon icon={faSpinner} spin /> : title} 
             </button>
         </form>
     </div>
